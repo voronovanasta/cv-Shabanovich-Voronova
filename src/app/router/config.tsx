@@ -3,6 +3,7 @@ import PrivateRoute from '../../shared/routing/PrivateRoute';
 import AuthLayout from '../../features/auth/layouts/AuthLayout';
 import MainLayout from '../../shared/ui/MainLayout';
 import { Example } from '../../example';
+import { Login } from '../../login';
 
 //TODO
 // Lazy загрузка страниц
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
     path: 'auth',
     element: <AuthLayout />,
     children: [
-      { path: 'login', element: /* LoginPage */ null },
+      { path: 'login', element: <Login /> },
       { path: 'register', element: /* RegisterPage */ null },
     ],
   },

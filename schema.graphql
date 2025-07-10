@@ -44,6 +44,16 @@ type LanguageType {
   name: String!
 }
 
+input LoginInput {
+  password: String!
+  username: String!
+}
+
+type LoginResponse {
+  accessToken: String!
+  user: UserType!
+}
+
 type Mutation {
   createCV(input: CVInput!): CVType!
   createDepartment(input: DepartmentInput!): DepartmentType!
@@ -59,6 +69,7 @@ type Mutation {
   deleteProject(id: ID!): Boolean!
   deleteSkill(id: ID!): Boolean!
   deleteUser(id: ID!): Boolean!
+  login(input: LoginInput!): LoginResponse
   updateCV(id: ID!, input: CVInput): CVType
   updateDepartment(id: ID!, input: DepartmentInput): DepartmentType
   updateLanguage(id: ID!, input: LanguageInput): LanguageType

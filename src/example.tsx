@@ -13,6 +13,17 @@ export const GetDepartmentsQuery = gql`
   }
 `;
 
+export const LoginUserMutation = gql`
+  mutation Login($input: LoginInput!) {
+    login(input: $input) {
+      accessToken
+      user {
+        username
+      }
+    }
+  }
+`;
+
 export function Example() {
   const { data } = useQuery({
     queryKey: ['departments'],
