@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import PrivateRoute from '../../shared/routing/PrivateRoute';
 import AuthLayout from '../../features/auth/layouts/AuthLayout';
 import MainLayout from '../../shared/ui/MainLayout';
+import { Example } from '../../example';
 
 //TODO
 // Lazy загрузка страниц
@@ -31,7 +32,7 @@ export const router = createBrowserRouter([
         path: 'users',
         element: <MainLayout />,
         children: [
-          { index: true, element: /* UsersPage */ null },
+          { index: true, element: /* UsersPage */ <Example /> },
           { path: ':userId/profile', element: /* UserProfilePage */ null },
           { path: ':userId/skills', element: /* UserSkillsPage */ null },
           { path: ':userId/languages', element: /* UserLanguagesPage */ null },
