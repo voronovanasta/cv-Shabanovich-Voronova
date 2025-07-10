@@ -65,6 +65,17 @@ export type LanguageType = {
   name: Scalars['String']['output'];
 };
 
+export type LoginInput = {
+  password: Scalars['String']['input'];
+  username: Scalars['String']['input'];
+};
+
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  accessToken: Scalars['String']['output'];
+  user: UserType;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createCV: CvType;
@@ -81,6 +92,7 @@ export type Mutation = {
   deleteProject: Scalars['Boolean']['output'];
   deleteSkill: Scalars['Boolean']['output'];
   deleteUser: Scalars['Boolean']['output'];
+  login?: Maybe<LoginResponse>;
   updateCV?: Maybe<CvType>;
   updateDepartment?: Maybe<DepartmentType>;
   updateLanguage?: Maybe<LanguageType>;
@@ -144,6 +156,10 @@ export type MutationDeleteSkillArgs = {
 
 export type MutationDeleteUserArgs = {
   id: Scalars['ID']['input'];
+};
+
+export type MutationLoginArgs = {
+  input: LoginInput;
 };
 
 export type MutationUpdateCvArgs = {
@@ -301,6 +317,19 @@ export type GetDepartmentsQuery = {
   departments: Array<{ __typename?: 'DepartmentType'; id: string; name: string }>;
 };
 
+export type LoginMutationVariables = Exact<{
+  input: LoginInput;
+}>;
+
+export type LoginMutation = {
+  __typename?: 'Mutation';
+  login?: {
+    __typename?: 'LoginResponse';
+    accessToken: string;
+    user: { __typename?: 'UserType'; username: string };
+  } | null;
+};
+
 export const GetDepartmentsDocument = gql`
   query getDepartments {
     departments {
@@ -309,3 +338,13 @@ export const GetDepartmentsDocument = gql`
     }
   }
 ` as unknown as DocumentNode<GetDepartmentsQuery, GetDepartmentsQueryVariables>;
+export const LoginDocument = gql`
+  mutation Login($input: LoginInput!) {
+    login(input: $input) {
+      accessToken
+      user {
+        username
+      }
+    }
+  }
+` as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
