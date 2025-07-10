@@ -1,0 +1,149 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+input CVInput {
+  education: [String!]!
+  experience: [String!]!
+  languages: [String!]!
+  skills: [String!]!
+  summary: String!
+  userId: String!
+}
+
+type CVType {
+  education: [String!]!
+  experience: [String!]!
+  id: ID!
+  languages: [String!]!
+  skills: [String!]!
+  summary: String!
+  userId: String!
+}
+
+input DepartmentInput {
+  description: String!
+  name: String!
+}
+
+type DepartmentType {
+  description: String!
+  id: ID!
+  name: String!
+}
+
+input LanguageInput {
+  level: String!
+  name: String!
+}
+
+type LanguageType {
+  id: ID!
+  level: String!
+  name: String!
+}
+
+type Mutation {
+  createCV(input: CVInput!): CVType!
+  createDepartment(input: DepartmentInput!): DepartmentType!
+  createLanguage(input: LanguageInput!): LanguageType!
+  createPosition(input: PositionInput!): PositionType!
+  createProject(input: ProjectInput!): ProjectType!
+  createSkill(input: SkillInput!): SkillType!
+  createUser(input: UserInput!): UserType!
+  deleteCV(id: ID!): Boolean!
+  deleteDepartment(id: ID!): Boolean!
+  deleteLanguage(id: ID!): Boolean!
+  deletePosition(id: ID!): Boolean!
+  deleteProject(id: ID!): Boolean!
+  deleteSkill(id: ID!): Boolean!
+  deleteUser(id: ID!): Boolean!
+  updateCV(id: ID!, input: CVInput): CVType
+  updateDepartment(id: ID!, input: DepartmentInput): DepartmentType
+  updateLanguage(id: ID!, input: LanguageInput): LanguageType
+  updatePosition(id: ID!, input: PositionInput): PositionType
+  updateProject(id: ID!, input: ProjectInput): ProjectType
+  updateSkill(id: ID!, input: SkillInput): SkillType
+  updateUser(id: ID!, input: UserInput): UserType
+}
+
+input PositionInput {
+  description: String!
+  name: String!
+}
+
+type PositionType {
+  description: String!
+  id: ID!
+  name: String!
+}
+
+input ProjectInput {
+  description: String!
+  endDate: String!
+  members: [String!]!
+  name: String!
+  startDate: String!
+}
+
+type ProjectType {
+  description: String!
+  endDate: String!
+  id: ID!
+  members: [String!]!
+  name: String!
+  startDate: String!
+}
+
+type Query {
+  cv(id: ID!): CVType
+  cvs: [CVType!]!
+  department(id: ID!): DepartmentType
+  departments: [DepartmentType!]!
+  language(id: ID!): LanguageType
+  languages: [LanguageType!]!
+  position(id: ID!): PositionType
+  positions: [PositionType!]!
+  project(id: ID!): ProjectType
+  projects: [ProjectType!]!
+  skill(id: ID!): SkillType
+  skills: [SkillType!]!
+  user(id: ID!): UserType
+  users: [UserType!]!
+}
+
+input SkillInput {
+  description: String!
+  name: String!
+}
+
+type SkillType {
+  description: String!
+  id: ID!
+  name: String!
+}
+
+input UserInput {
+  departmentId: String!
+  email: String!
+  firstName: String!
+  languages: [String!]!
+  lastName: String!
+  password: String!
+  positionId: String!
+  skills: [String!]!
+  username: String!
+}
+
+type UserType {
+  departmentId: String!
+  email: String!
+  firstName: String!
+  id: ID!
+  languages: [String!]!
+  lastName: String!
+  positionId: String!
+  skills: [String!]!
+  username: String!
+}
