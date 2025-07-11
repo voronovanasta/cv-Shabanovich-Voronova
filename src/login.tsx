@@ -3,7 +3,7 @@ import type { LoginMutation, LoginMutationVariables } from './graphql/graphql';
 import { LoginDocument } from './graphql/graphql';
 import { execute } from './graphql/execute';
 
-function useLogin() {
+export function useLogin() {
   return useMutation<LoginMutation, Error, LoginMutationVariables>({
     mutationFn: (variables: LoginMutationVariables) =>
       execute<LoginMutation, LoginMutationVariables>(LoginDocument, variables),
@@ -21,8 +21,8 @@ export function Login() {
   const handleLogin = () => {
     loginMutation.mutate({
       input: {
-        username: 'Faye_Purdy30',
-        password: '9P07Rg1MSHYOJuq',
+        username: 'Veronica92',
+        password: 'rLkvx2WK11EQxR6',
       },
     });
   };

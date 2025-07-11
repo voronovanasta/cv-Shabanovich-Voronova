@@ -1,8 +1,9 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { GetDepartmentsDocument } from './graphql/graphql';
 import { execute } from './graphql/execute';
 
 import { gql } from 'graphql-tag';
+import { useLogin } from './login';
 
 export const GetDepartmentsQuery = gql`
   query getDepartments {
@@ -25,12 +26,15 @@ export const LoginUserMutation = gql`
 `;
 
 export function Example() {
-  const { data } = useQuery({
-    queryKey: ['departments'],
-    queryFn: () => execute(GetDepartmentsDocument),
-  });
+  // const { mutate} = useLogin();
+  // const token = localStorage.getItem('accessToken');
+  // if (token) {
+  //   const { data } = useQuery({
+  //     queryKey: ['departments'],
+  //     queryFn: () => execute(GetDepartmentsDocument, localStorage.getItem('accessToken')),
+  //   });
+  // }
+  // console.log(data);
 
-  console.log(data);
-
-  return <div>hhhhhh</div>;
+  return <div>Example</div>;
 }

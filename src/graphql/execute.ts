@@ -33,5 +33,5 @@ export async function execute<TResult, TVariables = {}>(
     throw new Error(json.errors[0].message);
   }
 
-  return response.json() as TResult;
+  return response as TResult;
 }
