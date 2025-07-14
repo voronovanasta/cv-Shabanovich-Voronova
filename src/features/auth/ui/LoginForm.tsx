@@ -11,7 +11,8 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm, Controller } from 'react-hook-form';
 import useLogin from '../model/useLogin';
-import { useNavigate } from 'react-router';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { loginSchema, type LoginFormValues } from '../model/validation/login.schema';
 
 interface LoginFormInputs {
   email: string;
@@ -19,26 +20,23 @@ interface LoginFormInputs {
 }
 
 export default function LoginForm() {
-  const { control, handleSubmit } = useForm<LoginFormInputs>();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+  });
   const [showPassword, setShowPassword] = useState(false);
   const loginMutation = useLogin();
-  const navigate = useNavigate();
 
   const onSubmit = (data: LoginFormInputs) => {
-    console.log('Login:', data);
     loginMutation.mutate({
       input: {
-        username: data.email,
+        email: data.email,
         password: data.password,
       },
     });
-    if (loginMutation.isError) {
-      console.log((loginMutation.error as Error).message);
-    }
-
-    if (loginMutation.isSuccess) {
-      navigate('/users');
-    }
   };
 
   return (
@@ -61,6 +59,8 @@ export default function LoginForm() {
               fullWidth
               variant='outlined'
               label='Email'
+              error={!!errors.email}
+              helperText={errors.email?.message}
               InputLabelProps={{ style: { color: '#aaa' } }}
               InputProps={{ style: { color: '#fff' } }}
               sx={{ mb: 2, backgroundColor: '#2a2a2a', borderRadius: 1 }}
@@ -79,6 +79,8 @@ export default function LoginForm() {
               variant='outlined'
               label='Password'
               type={showPassword ? 'text' : 'password'}
+              error={!!errors.password}
+              helperText={errors.password?.message}
               InputLabelProps={{ style: { color: '#aaa' } }}
               InputProps={{
                 style: { color: '#fff' },
