@@ -1,9 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import PrivateRoute from '../../shared/routing/PrivateRoute';
-import AuthLayout from '../../features/auth/layouts/AuthLayout';
 import MainLayout from '../../shared/ui/MainLayout';
-import { Example } from '../../example';
-import { Login } from '../../login';
+import LoginPage from '../../pages/auth/login';
+import AuthLayout from '../../widgets/auth-layout/ui';
 
 //TODO
 // Lazy загрузка страниц
@@ -22,7 +21,7 @@ export const router = createBrowserRouter([
     path: 'auth',
     element: <AuthLayout />,
     children: [
-      { path: 'login', element: <Login /> },
+      { path: 'login', element: <LoginPage /> },
       { path: 'register', element: /* RegisterPage */ null },
     ],
   },
@@ -33,7 +32,7 @@ export const router = createBrowserRouter([
         path: 'users',
         element: <MainLayout />,
         children: [
-          { index: true, element: /* UsersPage */ <Example /> },
+          { index: true, element: /* UsersPage */ null },
           { path: ':userId/profile', element: /* UserProfilePage */ null },
           { path: ':userId/skills', element: /* UserSkillsPage */ null },
           { path: ':userId/languages', element: /* UserLanguagesPage */ null },

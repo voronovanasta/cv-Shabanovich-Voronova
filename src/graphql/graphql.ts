@@ -67,7 +67,7 @@ export type LanguageType = {
 
 export type LoginInput = {
   password: Scalars['String']['input'];
-  username: Scalars['String']['input'];
+  email: Scalars['String']['input'];
 };
 
 export type LoginResponse = {
