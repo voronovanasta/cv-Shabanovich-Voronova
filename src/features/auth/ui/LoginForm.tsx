@@ -10,6 +10,8 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm, Controller } from 'react-hook-form';
+import useLogin from '../model/useLogin';
+import { useNavigate } from 'react-router';
 
 interface LoginFormInputs {
   email: string;
@@ -19,10 +21,24 @@ interface LoginFormInputs {
 export default function LoginForm() {
   const { control, handleSubmit } = useForm<LoginFormInputs>();
   const [showPassword, setShowPassword] = useState(false);
+  const loginMutation = useLogin();
+  const navigate = useNavigate();
 
   const onSubmit = (data: LoginFormInputs) => {
     console.log('Login:', data);
-    // call loginMutation.mutate(data) here
+    loginMutation.mutate({
+      input: {
+        username: data.email,
+        password: data.password,
+      },
+    });
+    if (loginMutation.isError) {
+      console.log((loginMutation.error as Error).message);
+    }
+
+    if (loginMutation.isSuccess) {
+      navigate('/users');
+    }
   };
 
   return (
