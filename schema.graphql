@@ -45,8 +45,8 @@ type LanguageType {
 }
 
 input LoginInput {
+  email: String!
   password: String!
-  username: String!
 }
 
 type LoginResponse {
