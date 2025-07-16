@@ -10,9 +10,9 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm, Controller } from 'react-hook-form';
-// import useLogin from '../model/useLogin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema, type RegisterFormValues } from '../model/validation/register.schema';
+import useRegister from '../model/useRegister';
 
 interface RegisterFormInputs {
   email: string;
@@ -28,16 +28,15 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema),
   });
   const [showPassword, setShowPassword] = useState(false);
-  //   const loginMutation = useRegister();
+  const registerMutation = useRegister();
 
   const onSubmit = (data: RegisterFormInputs) => {
-    // loginMutation.mutate({
-    //   input: {
-    //     email: data.email,
-    //     password: data.password,
-    //   },
-    // });
-    console.log(data);
+    registerMutation.mutate({
+      input: {
+        email: data.email,
+        password: data.password,
+      },
+    });
   };
 
   return (
