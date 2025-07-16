@@ -10,7 +10,7 @@ const config: CodegenConfig = {
       },
     },
   ],
-  documents: ['src/**/*.graphql', 'src/**/*.tsx'],
+  documents: ['src/features/**/*.{graphql,gql}', 'src/**/*.tsx', 'src/**/*.ts'],
   ignoreNoDocuments: true,
   generates: {
     './src/graphql/': {
@@ -20,6 +20,7 @@ const config: CodegenConfig = {
       },
       config: {
         documentMode: 'graphQLTag',
+        useTypeImports: true,
       },
     },
     './schema.graphql': {

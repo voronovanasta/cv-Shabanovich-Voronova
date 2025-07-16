@@ -6,19 +6,15 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
-  [_ in K]?: never;
-};
-export type Incremental<T> =
-  | T
-  | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
 };
 
 export type CvInput = {
@@ -66,8 +62,8 @@ export type LanguageType = {
 };
 
 export type LoginInput = {
-  password: Scalars['String']['input'];
   email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type LoginResponse = {
@@ -102,95 +98,117 @@ export type Mutation = {
   updateUser?: Maybe<UserType>;
 };
 
+
 export type MutationCreateCvArgs = {
   input: CvInput;
 };
+
 
 export type MutationCreateDepartmentArgs = {
   input: DepartmentInput;
 };
 
+
 export type MutationCreateLanguageArgs = {
   input: LanguageInput;
 };
+
 
 export type MutationCreatePositionArgs = {
   input: PositionInput;
 };
 
+
 export type MutationCreateProjectArgs = {
   input: ProjectInput;
 };
+
 
 export type MutationCreateSkillArgs = {
   input: SkillInput;
 };
 
+
 export type MutationCreateUserArgs = {
   input: UserInput;
 };
+
 
 export type MutationDeleteCvArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type MutationDeleteDepartmentArgs = {
   id: Scalars['ID']['input'];
 };
+
 
 export type MutationDeleteLanguageArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type MutationDeletePositionArgs = {
   id: Scalars['ID']['input'];
 };
+
 
 export type MutationDeleteProjectArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type MutationDeleteSkillArgs = {
   id: Scalars['ID']['input'];
 };
+
 
 export type MutationDeleteUserArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type MutationLoginArgs = {
   input: LoginInput;
 };
+
 
 export type MutationUpdateCvArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<CvInput>;
 };
 
+
 export type MutationUpdateDepartmentArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<DepartmentInput>;
 };
+
 
 export type MutationUpdateLanguageArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<LanguageInput>;
 };
 
+
 export type MutationUpdatePositionArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<PositionInput>;
 };
+
 
 export type MutationUpdateProjectArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<ProjectInput>;
 };
 
+
 export type MutationUpdateSkillArgs = {
   id: Scalars['ID']['input'];
   input?: InputMaybe<SkillInput>;
 };
+
 
 export type MutationUpdateUserArgs = {
   id: Scalars['ID']['input'];
@@ -245,29 +263,36 @@ export type Query = {
   users: Array<UserType>;
 };
 
+
 export type QueryCvArgs = {
   id: Scalars['ID']['input'];
 };
+
 
 export type QueryDepartmentArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type QueryLanguageArgs = {
   id: Scalars['ID']['input'];
 };
+
 
 export type QueryPositionArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type QueryProjectArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type QuerySkillArgs = {
   id: Scalars['ID']['input'];
 };
+
 
 export type QueryUserArgs = {
   id: Scalars['ID']['input'];
@@ -286,65 +311,45 @@ export type SkillType = {
 };
 
 export type UserInput = {
-  departmentId: Scalars['String']['input'];
+  departmentId?: InputMaybe<Scalars['String']['input']>;
   email: Scalars['String']['input'];
-  firstName: Scalars['String']['input'];
-  languages: Array<Scalars['String']['input']>;
-  lastName: Scalars['String']['input'];
+  firstName?: InputMaybe<Scalars['String']['input']>;
+  languages?: InputMaybe<Array<Scalars['String']['input']>>;
+  lastName?: InputMaybe<Scalars['String']['input']>;
   password: Scalars['String']['input'];
-  positionId: Scalars['String']['input'];
-  skills: Array<Scalars['String']['input']>;
-  username: Scalars['String']['input'];
+  positionId?: InputMaybe<Scalars['String']['input']>;
+  skills?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserType = {
   __typename?: 'UserType';
-  departmentId: Scalars['String']['output'];
+  departmentId?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
-  firstName: Scalars['String']['output'];
+  firstName?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  languages: Array<Scalars['String']['output']>;
-  lastName: Scalars['String']['output'];
-  positionId: Scalars['String']['output'];
-  skills: Array<Scalars['String']['output']>;
-  username: Scalars['String']['output'];
-};
-
-export type GetDepartmentsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetDepartmentsQuery = {
-  __typename?: 'Query';
-  departments: Array<{ __typename?: 'DepartmentType'; id: string; name: string }>;
+  languages?: Maybe<Array<Scalars['String']['output']>>;
+  lastName?: Maybe<Scalars['String']['output']>;
+  positionId?: Maybe<Scalars['String']['output']>;
+  skills?: Maybe<Array<Scalars['String']['output']>>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type LoginMutationVariables = Exact<{
   input: LoginInput;
 }>;
 
-export type LoginMutation = {
-  __typename?: 'Mutation';
-  login?: {
-    __typename?: 'LoginResponse';
-    accessToken: string;
-    user: { __typename?: 'UserType'; username: string };
-  } | null;
-};
 
-export const GetDepartmentsDocument = gql`
-  query getDepartments {
-    departments {
-      id
-      name
-    }
-  }
-` as unknown as DocumentNode<GetDepartmentsQuery, GetDepartmentsQueryVariables>;
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'UserType', username?: string | null } } | null };
+
+
 export const LoginDocument = gql`
-  mutation Login($input: LoginInput!) {
-    login(input: $input) {
-      accessToken
-      user {
-        username
-      }
+    mutation Login($input: LoginInput!) {
+  login(input: $input) {
+    accessToken
+    user {
+      username
     }
   }
-` as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+}
+    ` as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
