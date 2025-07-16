@@ -8,6 +8,7 @@ import {
   Link,
   Paper,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -120,7 +121,7 @@ export default function RegisterForm() {
         </Button>
 
         <Typography variant='body2' align='center' sx={{ color: '#777' }}>
-          <Link href='#' underline='hover' sx={{ color: '#777' }}>
+          <Link component={RouterLink} to='auth/login' underline='hover' sx={{ color: '#777' }}>
             I HAVE AN ACCOUNT
           </Link>
         </Typography>

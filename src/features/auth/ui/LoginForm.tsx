@@ -8,6 +8,7 @@ import {
   Link,
   Paper,
 } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useForm, Controller } from 'react-hook-form';
 import useLogin from '../model/useLogin';
@@ -120,7 +121,12 @@ export default function LoginForm() {
         </Button>
 
         <Typography variant='body2' align='center' sx={{ color: '#777' }}>
-          <Link href='#' underline='hover' sx={{ color: '#777' }}>
+          <Link
+            component={RouterLink}
+            to='/forgotpassword'
+            underline='hover'
+            sx={{ color: '#777' }}
+          >
             FORGOT PASSWORD
           </Link>
         </Typography>

@@ -14,11 +14,7 @@ export default function useRegister() {
       execute<RegisterMutation, RegisterMutationVariables>(RegisterDocument, variables),
     onSuccess: (data) => {
       console.log(data);
-      // if (data.login?.accessToken) {
-      //   console.log(data.login.accessToken);
-      //   localStorage.setItem('accessToken', data.login.accessToken);
-      // }
-      navigate('/users');
+      navigate('auth/login');
     },
     onError: (error: Error) => {
       console.log(error.message);
