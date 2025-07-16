@@ -8,7 +8,6 @@ export async function execute<TResult, TVariables = {}>(
 ) {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
-    Accept: 'application/graphql-response+json',
   };
 
   if (token) {
@@ -22,16 +21,7 @@ export async function execute<TResult, TVariables = {}>(
       query: query.loc?.source.body ?? '', // берем строку запроса из AST
       variables,
     }),
-  });
+  }).then((res) => res.json());
 
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  const json = await response.json();
-
-  if (json.errors && json.errors.length > 0) {
-    throw new Error(json.errors[0].message);
-  }
-
-  return response as TResult;
+  return response?.data as TResult;
 }

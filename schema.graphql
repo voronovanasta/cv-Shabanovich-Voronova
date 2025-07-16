@@ -45,8 +45,8 @@ type LanguageType {
 }
 
 input LoginInput {
+  email: String!
   password: String!
-  username: String!
 }
 
 type LoginResponse {
@@ -136,25 +136,25 @@ type SkillType {
 }
 
 input UserInput {
-  departmentId: String!
+  departmentId: String
   email: String!
-  firstName: String!
-  languages: [String!]!
-  lastName: String!
+  firstName: String
+  languages: [String!]
+  lastName: String
   password: String!
-  positionId: String!
-  skills: [String!]!
-  username: String!
+  positionId: String
+  skills: [String!]
+  username: String
 }
 
 type UserType {
-  departmentId: String!
+  departmentId: String
   email: String!
-  firstName: String!
+  firstName: String
   id: ID!
-  languages: [String!]!
-  lastName: String!
-  positionId: String!
-  skills: [String!]!
-  username: String!
+  languages: [String!]
+  lastName: String
+  positionId: String
+  skills: [String!]
+  username: String
 }

@@ -66,8 +66,8 @@ export type LanguageType = {
 };
 
 export type LoginInput = {
-  password: Scalars['String']['input'];
   email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
 };
 
 export type LoginResponse = {
@@ -286,35 +286,28 @@ export type SkillType = {
 };
 
 export type UserInput = {
-  departmentId: Scalars['String']['input'];
+  departmentId?: InputMaybe<Scalars['String']['input']>;
   email: Scalars['String']['input'];
-  firstName: Scalars['String']['input'];
-  languages: Array<Scalars['String']['input']>;
-  lastName: Scalars['String']['input'];
+  firstName?: InputMaybe<Scalars['String']['input']>;
+  languages?: InputMaybe<Array<Scalars['String']['input']>>;
+  lastName?: InputMaybe<Scalars['String']['input']>;
   password: Scalars['String']['input'];
-  positionId: Scalars['String']['input'];
-  skills: Array<Scalars['String']['input']>;
-  username: Scalars['String']['input'];
+  positionId?: InputMaybe<Scalars['String']['input']>;
+  skills?: InputMaybe<Array<Scalars['String']['input']>>;
+  username?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type UserType = {
   __typename?: 'UserType';
-  departmentId: Scalars['String']['output'];
+  departmentId?: Maybe<Scalars['String']['output']>;
   email: Scalars['String']['output'];
-  firstName: Scalars['String']['output'];
+  firstName?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  languages: Array<Scalars['String']['output']>;
-  lastName: Scalars['String']['output'];
-  positionId: Scalars['String']['output'];
-  skills: Array<Scalars['String']['output']>;
-  username: Scalars['String']['output'];
-};
-
-export type GetDepartmentsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetDepartmentsQuery = {
-  __typename?: 'Query';
-  departments: Array<{ __typename?: 'DepartmentType'; id: string; name: string }>;
+  languages?: Maybe<Array<Scalars['String']['output']>>;
+  lastName?: Maybe<Scalars['String']['output']>;
+  positionId?: Maybe<Scalars['String']['output']>;
+  skills?: Maybe<Array<Scalars['String']['output']>>;
+  username?: Maybe<Scalars['String']['output']>;
 };
 
 export type LoginMutationVariables = Exact<{
@@ -326,18 +319,19 @@ export type LoginMutation = {
   login?: {
     __typename?: 'LoginResponse';
     accessToken: string;
-    user: { __typename?: 'UserType'; username: string };
+    user: { __typename?: 'UserType'; username?: string | null };
   } | null;
 };
 
-export const GetDepartmentsDocument = gql`
-  query getDepartments {
-    departments {
-      id
-      name
-    }
-  }
-` as unknown as DocumentNode<GetDepartmentsQuery, GetDepartmentsQueryVariables>;
+export type RegisterMutationVariables = Exact<{
+  input: UserInput;
+}>;
+
+export type RegisterMutation = {
+  __typename?: 'Mutation';
+  createUser: { __typename?: 'UserType'; id: string; email: string };
+};
+
 export const LoginDocument = gql`
   mutation Login($input: LoginInput!) {
     login(input: $input) {
@@ -348,3 +342,11 @@ export const LoginDocument = gql`
     }
   }
 ` as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const RegisterDocument = gql`
+  mutation Register($input: UserInput!) {
+    createUser(input: $input) {
+      id
+      email
+    }
+  }
+` as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;

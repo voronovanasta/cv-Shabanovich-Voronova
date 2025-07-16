@@ -14,14 +14,14 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  '\n  query getDepartments {\n    departments {\n      id\n      name\n    }\n  }\n': typeof types.GetDepartmentsDocument;
-  '\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      accessToken\n      user {\n        username\n      }\n    }\n  }\n': typeof types.LoginDocument;
+  'mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}': typeof types.LoginDocument;
+  'mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}': typeof types.RegisterDocument;
 };
 const documents: Documents = {
-  '\n  query getDepartments {\n    departments {\n      id\n      name\n    }\n  }\n':
-    types.GetDepartmentsDocument,
-  '\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      accessToken\n      user {\n        username\n      }\n    }\n  }\n':
+  'mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}':
     types.LoginDocument,
+  'mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}':
+    types.RegisterDocument,
 };
 
 /**
@@ -42,14 +42,14 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query getDepartments {\n    departments {\n      id\n      name\n    }\n  }\n'
-): (typeof documents)['\n  query getDepartments {\n    departments {\n      id\n      name\n    }\n  }\n'];
+  source: 'mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}'
+): (typeof documents)['mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      accessToken\n      user {\n        username\n      }\n    }\n  }\n'
-): (typeof documents)['\n  mutation Login($input: LoginInput!) {\n    login(input: $input) {\n      accessToken\n      user {\n        username\n      }\n    }\n  }\n'];
+  source: 'mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}'
+): (typeof documents)['mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
