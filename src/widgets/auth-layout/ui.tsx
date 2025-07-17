@@ -9,7 +9,6 @@ export default function AuthLayout() {
       sx={{
         minHeight: '100vh',
         width: '100vw',
-        backgroundColor: '#1e1e1e',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -17,7 +16,6 @@ export default function AuthLayout() {
       }}
     >
       <Container
-        maxWidth='xs'
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -27,15 +25,9 @@ export default function AuthLayout() {
       >
         <Tabs
           value={currentTab}
-          // onChange={(_, newValue) => setTab(newValue)}
-          textColor='secondary'
-          indicatorColor='secondary'
           centered
           sx={{
-            color: '#fff',
             mb: 3,
-            '& .MuiTabs-indicator': { backgroundColor: '#d32f2f' },
-            '& .Mui-selected': { color: '#d32f2f' },
           }}
         >
           <Tab label='LOG IN' component={Link} to='/auth/login' />
@@ -50,7 +42,7 @@ export default function AuthLayout() {
             width: '100%',
           }}
         >
-          <Container maxWidth='xs'>
+          <Container maxWidth='sm'>
             <Outlet />
           </Container>
         </Box>
