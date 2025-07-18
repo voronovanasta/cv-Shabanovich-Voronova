@@ -41,11 +41,11 @@ export default function RegisterForm() {
   };
 
   return (
-    <Paper sx={{ p: 3, backgroundColor: 'transparent', boxShadow: 'none' }}>
-      <Typography variant='h5' sx={{ color: '#fff', textAlign: 'center', mb: 1 }}>
+    <Paper sx={{ p: 3 }}>
+      <Typography variant='h5' sx={{ textAlign: 'center', mb: 1 }}>
         Register now
       </Typography>
-      <Typography variant='body2' sx={{ color: '#aaa', textAlign: 'center', mb: 3 }}>
+      <Typography variant='body2' sx={{ textAlign: 'center', mb: 3 }}>
         Welcome! Sign up to continue
       </Typography>
 
@@ -60,11 +60,11 @@ export default function RegisterForm() {
               fullWidth
               variant='outlined'
               label='Email'
+              autoComplete='username'
               error={!!errors.email}
               helperText={errors.email?.message}
-              InputLabelProps={{ style: { color: '#aaa' } }}
               InputProps={{ style: { color: '#fff' } }}
-              sx={{ mb: 2, backgroundColor: '#2a2a2a', borderRadius: 1 }}
+              sx={{ mb: 2, borderRadius: 1 }}
             />
           )}
         />
@@ -82,7 +82,7 @@ export default function RegisterForm() {
               type={showPassword ? 'text' : 'password'}
               error={!!errors.password}
               helperText={errors.password?.message}
-              InputLabelProps={{ style: { color: '#aaa' } }}
+              autoComplete='current-password'
               InputProps={{
                 style: { color: '#fff' },
                 endAdornment: (
@@ -97,30 +97,27 @@ export default function RegisterForm() {
                   </InputAdornment>
                 ),
               }}
-              sx={{ mb: 3, backgroundColor: '#2a2a2a', borderRadius: 1 }}
+              sx={{ mb: 3, borderRadius: 1 }}
             />
           )}
         />
 
         <Button
           type='submit'
-          fullWidth
           variant='contained'
           sx={{
-            backgroundColor: '#d32f2f',
-            color: '#fff',
+            width: '50%',
+            mx: 'auto',
+            display: 'block',
             borderRadius: 10,
             py: 1.2,
             mb: 2,
-            '&:hover': {
-              backgroundColor: '#b71c1c',
-            },
           }}
         >
           CREATE ACCOUNT
         </Button>
 
-        <Typography variant='body2' align='center' sx={{ color: '#777' }}>
+        <Typography variant='body2' align='center'>
           <Link component={RouterLink} to='auth/login' underline='hover' sx={{ color: '#777' }}>
             I HAVE AN ACCOUNT
           </Link>

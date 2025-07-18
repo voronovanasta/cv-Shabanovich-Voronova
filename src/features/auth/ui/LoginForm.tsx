@@ -41,11 +41,11 @@ export default function LoginForm() {
   };
 
   return (
-    <Paper sx={{ p: 3, backgroundColor: 'transparent', boxShadow: 'none' }}>
-      <Typography variant='h5' sx={{ color: '#fff', textAlign: 'center', mb: 1 }}>
+    <Paper sx={{ p: 3, width: '100%' }}>
+      <Typography variant='h5' sx={{ textAlign: 'center', mb: 1 }}>
         Welcome back
       </Typography>
-      <Typography variant='body2' sx={{ color: '#aaa', textAlign: 'center', mb: 3 }}>
+      <Typography variant='body2' sx={{ textAlign: 'center', mb: 3 }}>
         Hello again! Log in to continue
       </Typography>
 
@@ -62,9 +62,9 @@ export default function LoginForm() {
               label='Email'
               error={!!errors.email}
               helperText={errors.email?.message}
-              InputLabelProps={{ style: { color: '#aaa' } }}
+              autoComplete='username'
               InputProps={{ style: { color: '#fff' } }}
-              sx={{ mb: 2, backgroundColor: '#2a2a2a', borderRadius: 1 }}
+              sx={{ mb: 2, borderRadius: 1 }}
             />
           )}
         />
@@ -82,45 +82,44 @@ export default function LoginForm() {
               type={showPassword ? 'text' : 'password'}
               error={!!errors.password}
               helperText={errors.password?.message}
-              InputLabelProps={{ style: { color: '#aaa' } }}
-              InputProps={{
-                style: { color: '#fff' },
-                endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      onClick={() => setShowPassword((prev) => !prev)}
-                      edge='end'
-                      sx={{ color: '#aaa' }}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
+              autoComplete='current-password'
+              slotProps={{
+                input: {
+                  style: { color: '#fff' },
+                  endAdornment: (
+                    <InputAdornment position='end'>
+                      <IconButton
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        edge='end'
+                        sx={{ color: '#aaa' }}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
               }}
-              sx={{ mb: 3, backgroundColor: '#2a2a2a', borderRadius: 1 }}
+              sx={{ mb: 3, borderRadius: 1 }}
             />
           )}
         />
 
         <Button
           type='submit'
-          fullWidth
           variant='contained'
           sx={{
-            backgroundColor: '#d32f2f',
-            color: '#fff',
+            width: '50%',
+            mx: 'auto',
+            display: 'block',
             borderRadius: 10,
             py: 1.2,
             mb: 2,
-            '&:hover': {
-              backgroundColor: '#b71c1c',
-            },
           }}
         >
           LOG IN
         </Button>
 
-        <Typography variant='body2' align='center' sx={{ color: '#777' }}>
+        <Typography variant='body2' align='center'>
           <Link
             component={RouterLink}
             to='/forgotpassword'

@@ -6,7 +6,6 @@ export default function ForgotPasswordPage() {
     <Box
       sx={{
         height: '100vh',
-        backgroundColor: '#1e1e1e',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
