@@ -1,10 +1,10 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import PrivateRoute from '../../shared/routing/PrivateRoute';
-import MainLayout from '../../shared/ui/MainLayout';
 import LoginPage from '../../pages/auth/login';
 import AuthLayout from '../../widgets/auth-layout/ui';
 import RegisterPage from '../../pages/auth/register';
 import ForgotPasswordPage from '../../pages/auth/forgot-password';
+import MainLayout from '../../widgets/main-layout/ui/MainLayout';
 
 //TODO
 // Lazy загрузка страниц
