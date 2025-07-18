@@ -14,6 +14,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema, type RegisterFormValues } from '../model/validation/register.schema';
 import useRegister from '../model/useRegister';
+import { useTranslation } from 'react-i18next';
 
 interface RegisterFormInputs {
   email: string;
@@ -29,6 +30,7 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema),
   });
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
   const registerMutation = useRegister();
 
   const onSubmit = (data: RegisterFormInputs) => {
@@ -43,10 +45,10 @@ export default function RegisterForm() {
   return (
     <Paper sx={{ p: 3 }}>
       <Typography variant='h5' sx={{ textAlign: 'center', mb: 1 }}>
-        Register now
+        {t('auth.register.title')}
       </Typography>
       <Typography variant='body2' sx={{ textAlign: 'center', mb: 3 }}>
-        Welcome! Sign up to continue
+        {t('auth.register.subtitle')}
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -59,7 +61,7 @@ export default function RegisterForm() {
               {...field}
               fullWidth
               variant='outlined'
-              label='Email'
+              label={t('auth.email')}
               autoComplete='username'
               error={!!errors.email}
               helperText={errors.email?.message}
@@ -78,7 +80,7 @@ export default function RegisterForm() {
               {...field}
               fullWidth
               variant='outlined'
-              label='Password'
+              label={t('auth.password')}
               type={showPassword ? 'text' : 'password'}
               error={!!errors.password}
               helperText={errors.password?.message}
@@ -114,12 +116,12 @@ export default function RegisterForm() {
             mb: 2,
           }}
         >
-          CREATE ACCOUNT
+          {t('auth.register.button')}
         </Button>
 
         <Typography variant='body2' align='center'>
           <Link component={RouterLink} to='auth/login' underline='hover' sx={{ color: '#777' }}>
-            I HAVE AN ACCOUNT
+            {t('auth.haveAccount')}
           </Link>
         </Typography>
       </form>

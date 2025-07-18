@@ -1,0 +1,26 @@
+{
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "cancel": "Cancel",
+    "logout": "Logout",
+    "haveAccount": "I have an account",
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Hello again! Log in to continue",
+      "tab": "Log In",
+      "button": "Log In"
+    },
+    "register": {
+      "title": "Register now",
+      "subtitle": "Welcome! Sign up to continue",
+      "tab": "Sign Up",
+      "button": "Create Account"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "We will send you an email with further instructions",
+      "button": "Reset Password"
+    }
+  }
+}

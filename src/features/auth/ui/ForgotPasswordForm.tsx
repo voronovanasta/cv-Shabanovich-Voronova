@@ -6,6 +6,7 @@ import {
   type ForgotPasswordValues,
 } from '../model/validation/forgotPassword.schema.ts';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function ForgotPasswordForm() {
   const {
@@ -17,7 +18,7 @@ export function ForgotPasswordForm() {
     defaultValues: { email: '' },
   });
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const onSubmit = () => {
     navigate('auth/login');
   };
@@ -25,10 +26,10 @@ export function ForgotPasswordForm() {
   return (
     <Paper sx={{ p: 4, width: '100%' }}>
       <Typography variant='h5' align='center' sx={{ mb: 1 }}>
-        Forgot password
+        {t('auth.forgotPassword.title')}
       </Typography>
       <Typography variant='body2' align='center' sx={{ mb: 3 }}>
-        We will send you an email with further instructions
+        {t('auth.forgotPassword.subtitle')}
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -39,7 +40,7 @@ export function ForgotPasswordForm() {
             <TextField
               {...field}
               fullWidth
-              label='Email'
+              label={t('auth.email')}
               variant='outlined'
               error={!!errors.email}
               helperText={errors.email?.message}
@@ -65,11 +66,12 @@ export function ForgotPasswordForm() {
             mb: 1,
           }}
         >
-          RESET PASSWORD
+          {t('auth.forgotPassword.button')}
+          {/* RESET PASSWORD */}
         </Button>
         <Typography variant='body2' align='center'>
           <Link component={RouterLink} to='/auth/login' underline='hover' sx={{ color: '#777' }}>
-            CANCEL
+            {t('auth.cancel')}
           </Link>
         </Typography>
       </form>

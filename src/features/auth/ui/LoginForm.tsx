@@ -14,6 +14,7 @@ import { useForm, Controller } from 'react-hook-form';
 import useLogin from '../model/useLogin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, type LoginFormValues } from '../model/validation/login.schema';
+import { useTranslation } from 'react-i18next';
 
 interface LoginFormInputs {
   email: string;
@@ -29,6 +30,7 @@ export default function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
   const loginMutation = useLogin();
 
   const onSubmit = (data: LoginFormInputs) => {
@@ -43,10 +45,10 @@ export default function LoginForm() {
   return (
     <Paper sx={{ p: 3, width: '100%' }}>
       <Typography variant='h5' sx={{ textAlign: 'center', mb: 1 }}>
-        Welcome back
+        {t('auth.login.title')}
       </Typography>
       <Typography variant='body2' sx={{ textAlign: 'center', mb: 3 }}>
-        Hello again! Log in to continue
+        {t('auth.login.subtitle')}
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -59,7 +61,7 @@ export default function LoginForm() {
               {...field}
               fullWidth
               variant='outlined'
-              label='Email'
+              label={t('auth.email')}
               error={!!errors.email}
               helperText={errors.email?.message}
               autoComplete='username'
@@ -78,7 +80,7 @@ export default function LoginForm() {
               {...field}
               fullWidth
               variant='outlined'
-              label='Password'
+              label={t('auth.password')}
               type={showPassword ? 'text' : 'password'}
               error={!!errors.password}
               helperText={errors.password?.message}
@@ -116,7 +118,7 @@ export default function LoginForm() {
             mb: 2,
           }}
         >
-          LOG IN
+          {t('auth.login.tab')}
         </Button>
 
         <Typography variant='body2' align='center'>
@@ -126,7 +128,7 @@ export default function LoginForm() {
             underline='hover'
             sx={{ color: '#777' }}
           >
-            FORGOT PASSWORD
+            {t('auth.forgotPassword.title')}
           </Link>
         </Typography>
       </form>
