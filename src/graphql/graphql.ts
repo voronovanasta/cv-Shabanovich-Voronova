@@ -349,6 +349,21 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', createUser: { __typename?: 'UserType', id: string, email: string } };
 
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  input?: InputMaybe<UserInput>;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UserType', id: string, username?: string | null, email: string, firstName?: string | null, lastName?: string | null, departmentId?: string | null, positionId?: string | null, skills?: Array<string> | null, languages?: Array<string> | null } | null };
+
+export type GetUserQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'UserType', id: string, username?: string | null, email: string, firstName?: string | null, lastName?: string | null, departmentId?: string | null, positionId?: string | null, skills?: Array<string> | null, languages?: Array<string> | null } | null };
+
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -373,6 +388,36 @@ export const RegisterDocument = gql`
   }
 }
     ` as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($id: ID!, $input: UserInput) {
+  updateUser(id: $id, input: $input) {
+    id
+    username
+    email
+    firstName
+    lastName
+    departmentId
+    positionId
+    skills
+    languages
+  }
+}
+    ` as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
+export const GetUserDocument = gql`
+    query getUser($id: ID!) {
+  user(id: $id) {
+    id
+    username
+    email
+    firstName
+    lastName
+    departmentId
+    positionId
+    skills
+    languages
+  }
+}
+    ` as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
 export const GetUsersDocument = gql`
     query getUsers {
   users {

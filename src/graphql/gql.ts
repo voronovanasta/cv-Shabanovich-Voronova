@@ -16,11 +16,15 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
 type Documents = {
     "mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}": typeof types.LoginDocument,
     "mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}": typeof types.RegisterDocument,
+    "mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}": typeof types.UpdateUserDocument,
+    "query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}": typeof types.GetUserDocument,
     "query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}": typeof types.GetUsersDocument,
 };
 const documents: Documents = {
     "mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}": types.LoginDocument,
     "mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}": types.RegisterDocument,
+    "mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}": types.UpdateUserDocument,
+    "query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}": types.GetUserDocument,
     "query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}": types.GetUsersDocument,
 };
 
@@ -46,6 +50,14 @@ export function graphql(source: "mutation Login($input: LoginInput!) {\n  login(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}"): (typeof documents)["mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}"): (typeof documents)["mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}"): (typeof documents)["query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
