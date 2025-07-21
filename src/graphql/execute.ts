@@ -1,16 +1,18 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import { getAccessToken } from '../shared/lib/getAccessToken';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export async function execute<TResult, TVariables = {}>(
   query: TypedDocumentNode<TResult, TVariables>,
   variables?: TVariables,
-  token?: string
+  options?: { withAuth?: boolean }
 ) {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
 
-  if (token) {
+  if (options?.withAuth) {
+    const token = getAccessToken();
     headers['Authorization'] = `Bearer ${token}`;
   }
 
@@ -18,7 +20,7 @@ export async function execute<TResult, TVariables = {}>(
     method: 'POST',
     headers,
     body: JSON.stringify({
-      query: query.loc?.source.body ?? '', // берем строку запроса из AST
+      query: query.loc?.source.body ?? '',
       variables,
     }),
   }).then((res) => res.json());
