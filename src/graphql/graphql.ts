@@ -349,6 +349,11 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', createUser: { __typename?: 'UserType', id: string, email: string } };
 
+export type GetCVsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCVsQuery = { __typename?: 'Query', cvs: Array<{ __typename?: 'CVType', id: string, userId: string, summary: string, experience: Array<string>, education: Array<string>, skills: Array<string>, languages: Array<string> }> };
+
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -373,6 +378,19 @@ export const RegisterDocument = gql`
   }
 }
     ` as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const GetCVsDocument = gql`
+    query GetCVs {
+  cvs {
+    id
+    userId
+    summary
+    experience
+    education
+    skills
+    languages
+  }
+}
+    ` as unknown as DocumentNode<GetCVsQuery, GetCVsQueryVariables>;
 export const GetUsersDocument = gql`
     query getUsers {
   users {
