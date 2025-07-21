@@ -2,7 +2,6 @@ import { Fragment } from 'react/jsx-runtime';
 import {
   Box,
   Typography,
-  InputBase,
   Table,
   TableBody,
   TableCell,
@@ -12,35 +11,30 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import useCVs from '../../features/cvc/model/getCvs';
+import SearchBar from '../../shared/ui/searchbar/SearchBar';
+import useGetCVsList from '../../features/cvc/model/getCVs';
+import { useState } from 'react';
+import CreateCVModal from '../../shared/ui/modal/CreateCVModal';
 
 const CVsPage = () => {
-  const { data } = useCVs();
+  const { data } = useGetCVsList();
+  const [open, setOpen] = useState(false);
+  const handleCreateCV = () => {
+    console.log('hello');
+    setOpen(true);
+  };
   return (
     <Box color='white'>
+      <CreateCVModal open={open} onClose={() => setOpen(false)} onCreate={handleCreateCV} />
       <Typography variant='h6' mb={2}>
         CVs
       </Typography>
       <Box display='flex' justifyContent='space-between' alignItems='center' mb={2}>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            backgroundColor: '#2d2d2d',
-            px: 2,
-            borderRadius: '8px',
-            height: 36,
-            width: 300,
-          }}
-        >
-          <SearchIcon sx={{ color: 'gray', mr: 1 }} />
-          <InputBase placeholder='Search' sx={{ color: 'white', width: '100%' }} />
-        </Box>
-
+        <SearchBar />
         <Button
+          onClick={handleCreateCV}
           sx={{
             display: 'flex',
             alignItems: 'center',

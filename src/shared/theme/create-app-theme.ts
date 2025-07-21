@@ -68,6 +68,13 @@ export const createAppTheme = (mode: 'dark' | 'light') => {
           },
         },
       },
+      MuiDialog: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: '#343534',
+          },
+        },
+      },
     },
   });
 };
