@@ -1,0 +1,11 @@
+query GetCVs {
+  cvs {
+    id
+    userId
+    summary
+    experience
+    education
+    skills
+    languages
+  }
+}

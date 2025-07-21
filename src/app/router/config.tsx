@@ -5,6 +5,7 @@ import AuthLayout from '../../widgets/auth-layout/ui';
 import RegisterPage from '../../pages/auth/register';
 import ForgotPasswordPage from '../../pages/auth/forgot-password';
 import MainLayout from '../../widgets/main-layout/ui/MainLayout';
+import UsersPage from '../../pages/users';
 import CVsPage from '../../pages/cvs/CVsPage';
 
 //TODO
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
         path: 'users',
         element: <MainLayout />,
         children: [
-          { index: true, element: /* UsersPage */ null },
+          { index: true, element: <UsersPage /> },
           { path: ':userId/profile', element: /* UserProfilePage */ null },
           { path: ':userId/skills', element: /* UserSkillsPage */ null },
           { path: ':userId/languages', element: /* UserLanguagesPage */ null },
