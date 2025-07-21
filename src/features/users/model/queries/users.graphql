@@ -1,0 +1,13 @@
+query getUsers {
+  users {
+    id
+    username
+    email
+    firstName
+    lastName
+    departmentId
+    positionId
+    languages
+    skills
+  }
+}
