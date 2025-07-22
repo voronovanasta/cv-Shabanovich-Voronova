@@ -1,116 +1,79 @@
-import { useState } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField,
   Button,
+  TextField,
+  Box,
   IconButton,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useForm } from 'react-hook-form';
+import type ICreateCVFormData from './types';
 
-interface CreateCVModalProps {
+interface CreateCvModalProps {
   open: boolean;
   onClose: () => void;
-  onCreate: (data: { name: string; education?: string; description?: string }) => void;
+  onSubmitCv: (data: ICreateCVFormData) => void;
 }
 
-export default function CreateCVModal({ open, onClose, onCreate }: CreateCVModalProps) {
-  const [name, setName] = useState('');
-  const [education, setEducation] = useState('');
-  const [description, setDescription] = useState('');
-  const [nameError, setNameError] = useState(false);
+export default function CreateCvModal({ open, onClose, onSubmitCv }: CreateCvModalProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ICreateCVFormData>();
 
-  const handleCreate = () => {
-    if (name.trim() === '') {
-      setNameError(true);
-      return;
-    }
-    onCreate({ name, education, description });
-    setName('');
-    setEducation('');
-    setDescription('');
-    setNameError(false);
+  const onSubmit = (data: ICreateCVFormData) => {
+    onSubmitCv(data);
+    reset();
     onClose();
   };
 
   const handleClose = () => {
-    setName('');
-    setEducation('');
-    setDescription('');
-    setNameError(false);
+    reset();
     onClose();
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} maxWidth='sm' fullWidth>
+    <Dialog open={open} onClose={handleClose} fullWidth maxWidth='sm'>
       <DialogTitle>
         Create CV
         <IconButton
           aria-label='close'
           onClick={handleClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
+          sx={{ position: 'absolute', right: 8, top: 8 }}
         >
           <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent>
-        <TextField
-          autoFocus
-          required
-          error={nameError}
-          helperText={nameError ? 'Name is required' : ''}
-          margin='dense'
-          label='Name'
-          type='text'
-          fullWidth
-          variant='outlined'
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            setNameError(false);
-          }}
-        />
-        <TextField
-          margin='dense'
-          label='Education'
-          type='text'
-          fullWidth
-          variant='outlined'
-          value={education}
-          onChange={(e) => setEducation(e.target.value)}
-        />
-        <TextField
-          margin='dense'
-          label='Description'
-          type='text'
-          fullWidth
-          multiline
-          minRows={4}
-          variant='outlined'
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color='secondary' variant='outlined'>
-          Cancel
-        </Button>
-        <Button
-          onClick={handleCreate}
-          color='primary'
-          variant='contained'
-          disabled={name.trim() === ''}
-        >
-          Create
-        </Button>
-      </DialogActions>
+
+      <Box component='form' onSubmit={handleSubmit(onSubmit)}>
+        <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <TextField
+            label='Name'
+            fullWidth
+            {...register('name', { required: 'Name is required' })}
+            error={!!errors.name}
+            helperText={errors.name?.message}
+          />
+
+          <TextField label='Education' fullWidth {...register('education')} />
+
+          <TextField label='Description' fullWidth multiline rows={5} {...register('summary')} />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleClose} variant='outlined'>
+            Cancel
+          </Button>
+          <Button type='submit' variant='contained'>
+            Create
+          </Button>
+        </DialogActions>
+      </Box>
     </Dialog>
   );
 }

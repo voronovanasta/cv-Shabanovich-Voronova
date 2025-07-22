@@ -2,6 +2,7 @@ query GetCVs {
   cvs {
     id
     userId
+    name
     summary
     experience
     education
