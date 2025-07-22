@@ -19,9 +19,10 @@ export type Scalars = {
 
 export type CvInput = {
   education: Array<Scalars['String']['input']>;
-  experience: Array<Scalars['String']['input']>;
-  languages: Array<Scalars['String']['input']>;
-  skills: Array<Scalars['String']['input']>;
+  experience?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  languages?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  name: Scalars['String']['input'];
+  skills?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   summary: Scalars['String']['input'];
   userId: Scalars['String']['input'];
 };
@@ -29,12 +30,13 @@ export type CvInput = {
 export type CvType = {
   __typename?: 'CVType';
   education: Array<Scalars['String']['output']>;
-  experience: Array<Scalars['String']['output']>;
+  experience?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   id: Scalars['ID']['output'];
-  languages: Array<Scalars['String']['output']>;
-  skills: Array<Scalars['String']['output']>;
+  languages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  name: Scalars['String']['output'];
+  skills?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   summary: Scalars['String']['output'];
-  userId: Scalars['String']['output'];
+  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type DepartmentInput = {
@@ -349,10 +351,17 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = { __typename?: 'Mutation', createUser: { __typename?: 'UserType', id: string, email: string } };
 
+export type CreateCvMutationVariables = Exact<{
+  input: CvInput;
+}>;
+
+
+export type CreateCvMutation = { __typename?: 'Mutation', createCV: { __typename?: 'CVType', id: string, userId?: string | null, name: string, summary: string, education: Array<string>, experience?: Array<string | null> | null, skills?: Array<string | null> | null, languages?: Array<string | null> | null } };
+
 export type GetCVsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCVsQuery = { __typename?: 'Query', cvs: Array<{ __typename?: 'CVType', id: string, userId: string, summary: string, experience: Array<string>, education: Array<string>, skills: Array<string>, languages: Array<string> }> };
+export type GetCVsQuery = { __typename?: 'Query', cvs: Array<{ __typename?: 'CVType', id: string, userId?: string | null, name: string, summary: string, experience?: Array<string | null> | null, education: Array<string>, skills?: Array<string | null> | null, languages?: Array<string | null> | null }> };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -378,11 +387,26 @@ export const RegisterDocument = gql`
   }
 }
     ` as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+export const CreateCvDocument = gql`
+    mutation CreateCV($input: CVInput!) {
+  createCV(input: $input) {
+    id
+    userId
+    name
+    summary
+    education
+    experience
+    skills
+    languages
+  }
+}
+    ` as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
 export const GetCVsDocument = gql`
     query GetCVs {
   cvs {
     id
     userId
+    name
     summary
     experience
     education

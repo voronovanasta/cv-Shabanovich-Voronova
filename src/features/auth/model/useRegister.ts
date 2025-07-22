@@ -12,8 +12,7 @@ export default function useRegister() {
   return useMutation<RegisterMutation, Error, RegisterMutationVariables>({
     mutationFn: (variables: RegisterMutationVariables) =>
       execute<RegisterMutation, RegisterMutationVariables>(RegisterDocument, variables),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       navigate('auth/login');
     },
     onError: (error: Error) => {

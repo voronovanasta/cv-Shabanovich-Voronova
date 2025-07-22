@@ -16,7 +16,6 @@ export default function useLogin() {
       if (data.login?.accessToken) {
         localStorage.setItem('accessToken', data.login.accessToken);
       }
-      console.log(data.login?.accessToken);
       navigate('/users');
     },
     onError: (error: Error) => {
