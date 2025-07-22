@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { GetUserDocument } from '../../../graphql/graphql';
-import { execute } from '../../../graphql/execute';
+import { GetUserDocument } from '../../../../graphql/graphql';
+import { execute } from '../../../../shared/api/execute';
 
 export default function useGetUser() {
   return useQuery({

@@ -1,5 +1,5 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import { getAccessToken } from '../shared/lib/getAccessToken';
+import { useAuthStore } from '../../features/auth/model/store/useAuthStore';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export async function execute<TResult, TVariables = {}>(
@@ -12,7 +12,7 @@ export async function execute<TResult, TVariables = {}>(
   };
 
   if (options?.withAuth) {
-    const token = getAccessToken();
+    const token = useAuthStore.getState().accessToken;
     headers['Authorization'] = `Bearer ${token}`;
   }
 

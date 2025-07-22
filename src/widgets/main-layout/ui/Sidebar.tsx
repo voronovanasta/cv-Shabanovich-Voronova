@@ -9,18 +9,34 @@ import {
   ListItem,
 } from '@mui/material';
 import { PeopleAlt, TrendingUp, Translate, Description, ChevronLeft } from '@mui/icons-material';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const navItems = [
-  { label: 'Employees', icon: <PeopleAlt />, path: '/employees' },
-  { label: 'Skills', icon: <TrendingUp />, path: '/skills' },
-  { label: 'Languages', icon: <Translate />, path: '/languages' },
-  { label: 'CVs', icon: <Description />, path: '/cvs' },
-];
+import { useTranslation } from 'react-i18next';
+import UserMenu from './UserMenu';
+import { useState } from 'react';
 
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const navItems = [
+    { label: t('sidebar.employees'), icon: <PeopleAlt />, path: '/employees' },
+    { label: t('sidebar.skills'), icon: <TrendingUp />, path: '/skills' },
+    { label: t('sidebar.languages'), icon: <Translate />, path: '/languages' },
+    { label: t('sidebar.cvs'), icon: <Description />, path: '/cvs' },
+  ];
 
   return (
     <Box
@@ -61,14 +77,18 @@ const Sidebar = () => {
         </List>
       </Box>
       <Box>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, px: 1 }}>
+        <Box
+          onClick={handlePopoverOpen}
+          sx={{ display: 'flex', alignItems: 'center', gap: 2, px: 1 }}
+        >
           <Avatar sx={{ bgcolor: 'error.main', width: 32, height: 32 }}>R</Avatar>
           <Typography variant='body2'>Rostislav Harlanov</Typography>
         </Box>
+        {open && (
+          <UserMenu anchorEl={anchorEl} open={open} handlePopoverClose={handlePopoverClose} />
+        )}
         <Box sx={{ p: 2 }}>
-          <Link to='/users'>
-            <ChevronLeft fontSize='small' />
-          </Link>
+          <ChevronLeft fontSize='small' />
         </Box>
       </Box>
     </Box>

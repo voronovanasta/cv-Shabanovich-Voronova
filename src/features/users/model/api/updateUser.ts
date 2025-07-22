@@ -3,8 +3,8 @@ import {
   UpdateUserDocument,
   type UpdateUserMutation,
   type UpdateUserMutationVariables,
-} from '../../../graphql/graphql';
-import { execute } from '../../../graphql/execute';
+} from '../../../../graphql/graphql';
+import { execute } from '../../../../shared/api/execute';
 
 export default function useUpdateUser() {
   return useMutation<UpdateUserMutation, Error, UpdateUserMutationVariables>({

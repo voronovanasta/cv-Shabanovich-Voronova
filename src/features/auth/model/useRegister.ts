@@ -4,7 +4,7 @@ import {
   type RegisterMutation,
   type RegisterMutationVariables,
 } from '../../../graphql/graphql';
-import { execute } from '../../../graphql/execute';
+import { execute } from '../../../shared/api/execute';
 import { useNavigate } from 'react-router-dom';
 
 export default function useRegister() {
@@ -12,8 +12,7 @@ export default function useRegister() {
   return useMutation<RegisterMutation, Error, RegisterMutationVariables>({
     mutationFn: (variables: RegisterMutationVariables) =>
       execute<RegisterMutation, RegisterMutationVariables>(RegisterDocument, variables),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       navigate('auth/login');
     },
     onError: (error: Error) => {

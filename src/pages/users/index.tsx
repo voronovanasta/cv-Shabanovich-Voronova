@@ -1,5 +1,5 @@
-import useUpdateUser from '../../features/users/model/updateUser';
-import useGetUsers from '../../features/users/model/getUsers';
+import useUpdateUser from '../../features/users/model/api/updateUser';
+import useGetUsers from '../../features/users/model/api/getUsers';
 
 export default function UsersPage() {
   const { data: users } = useGetUsers();
