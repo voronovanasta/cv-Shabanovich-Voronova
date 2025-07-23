@@ -342,7 +342,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'UserType', username?: string | null } } | null };
+export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'UserType', id: string, username?: string | null } } | null };
 
 export type RegisterMutationVariables = Exact<{
   input: UserInput;
@@ -370,6 +370,21 @@ export type GetCVsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCVsQuery = { __typename?: 'Query', cvs: Array<{ __typename?: 'CVType', id: string, userId?: string | null, name: string, summary: string, experience?: Array<string | null> | null, education: Array<string>, skills?: Array<string | null> | null, languages?: Array<string | null> | null }> };
 
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  input?: InputMaybe<UserInput>;
+}>;
+
+
+export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UserType', id: string, username?: string | null, email: string, firstName?: string | null, lastName?: string | null, departmentId?: string | null, positionId?: string | null, skills?: Array<string> | null, languages?: Array<string> | null } | null };
+
+export type GetUserQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'UserType', id: string, username?: string | null, email: string, firstName?: string | null, lastName?: string | null, departmentId?: string | null, positionId?: string | null, skills?: Array<string> | null, languages?: Array<string> | null } | null };
+
 export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -381,6 +396,7 @@ export const LoginDocument = gql`
   login(input: $input) {
     accessToken
     user {
+      id
       username
     }
   }
@@ -427,6 +443,36 @@ export const GetCVsDocument = gql`
   }
 }
     ` as unknown as DocumentNode<GetCVsQuery, GetCVsQueryVariables>;
+export const UpdateUserDocument = gql`
+    mutation UpdateUser($id: ID!, $input: UserInput) {
+  updateUser(id: $id, input: $input) {
+    id
+    username
+    email
+    firstName
+    lastName
+    departmentId
+    positionId
+    skills
+    languages
+  }
+}
+    ` as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
+export const GetUserDocument = gql`
+    query getUser($id: ID!) {
+  user(id: $id) {
+    id
+    username
+    email
+    firstName
+    lastName
+    departmentId
+    positionId
+    skills
+    languages
+  }
+}
+    ` as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
 export const GetUsersDocument = gql`
     query getUsers {
   users {

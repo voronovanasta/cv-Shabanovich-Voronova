@@ -6,6 +6,7 @@ import RegisterPage from '../../pages/auth/register';
 import ForgotPasswordPage from '../../pages/auth/forgot-password';
 import MainLayout from '../../widgets/main-layout/ui/MainLayout';
 import UsersPage from '../../pages/users';
+import SettingsPage from '../../pages/settings/SettingsPage';
 import CVsPage from '../../pages/cvs/CVsPage';
 
 //TODO
@@ -46,6 +47,11 @@ export const router = createBrowserRouter([
           { path: ':userId/languages', element: /* UserLanguagesPage */ null },
           { path: ':userId/cvs', element: /* UserCVsPage */ null },
         ],
+      },
+      {
+        path: 'settings',
+        element: <MainLayout />,
+        children: [{ index: true, element: <SettingsPage /> }],
       },
       {
         path: 'cvs',

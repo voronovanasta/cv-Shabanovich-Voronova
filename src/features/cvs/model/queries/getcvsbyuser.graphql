@@ -1,0 +1,12 @@
+query GetCVsByUser($userId: String!) {
+  cvsByUser(userId: $userId) {
+    id
+    userId
+    name
+    summary
+    experience
+    education
+    skills
+    languages
+  }
+}

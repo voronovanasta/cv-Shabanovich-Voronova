@@ -4,7 +4,7 @@ import {
   type DeleteCvMutation,
   type DeleteCvMutationVariables,
 } from '../../../graphql/graphql';
-import { execute } from '../../../graphql/execute';
+import { execute } from '../../../shared/api/execute';
 import { useNavigate } from 'react-router-dom';
 
 export default function useDeleteCV() {
