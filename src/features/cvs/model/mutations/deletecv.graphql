@@ -1,0 +1,3 @@
+mutation DeleteCV($id: ID!) {
+  deleteCV(id: $id)
+}
