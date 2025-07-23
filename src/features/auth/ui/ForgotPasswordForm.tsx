@@ -67,7 +67,6 @@ export function ForgotPasswordForm() {
           }}
         >
           {t('auth.forgotPassword.button')}
-          {/* RESET PASSWORD */}
         </Button>
         <Typography variant='body2' align='center'>
           <Link component={RouterLink} to='/auth/login' underline='hover' sx={{ color: '#777' }}>

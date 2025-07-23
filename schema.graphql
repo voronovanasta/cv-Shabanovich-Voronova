@@ -5,21 +5,23 @@ schema {
 
 input CVInput {
   education: [String!]!
-  experience: [String!]!
-  languages: [String!]!
-  skills: [String!]!
+  experience: [String]
+  languages: [String]
+  name: String!
+  skills: [String]
   summary: String!
   userId: String!
 }
 
 type CVType {
   education: [String!]!
-  experience: [String!]!
+  experience: [String]
   id: ID!
-  languages: [String!]!
-  skills: [String!]!
+  languages: [String]
+  name: String!
+  skills: [String]
   summary: String!
-  userId: String!
+  userId: String
 }
 
 input DepartmentInput {
