@@ -10,11 +10,9 @@ import {
 } from '@mui/material';
 import { PeopleAlt, TrendingUp, Translate, Description, ChevronLeft } from '@mui/icons-material';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import { useTranslation } from 'react-i18next';
-
 import { useState } from 'react';
-import UserMenu from '../../../widgets/main-layout/ui/UserMenu';
+import UserMenu from '../../../features/users/ui/menu/UserMenu';
 
 const Sidebar = () => {
   const location = useLocation();

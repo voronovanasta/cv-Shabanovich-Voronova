@@ -1,11 +1,19 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+type UserType = {
+  id: string;
+  profile: {
+    full_name?: string | null;
+    avatar?: string | null;
+  };
+};
+
 type AuthState = {
   accessToken: string | null;
-  userId: string | null;
-  username: string | null;
-  setAuth: (data: { token: string; id: string; username: string }) => void;
+  refreshToken: string | null;
+  user: UserType | null;
+  setAuth: (data: { token: string; refreshToken: string; user: UserType }) => void;
   clearAuth: () => void;
 };
 
@@ -13,10 +21,11 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       accessToken: null,
-      userId: null,
-      username: null,
-      setAuth: ({ token, id, username }) => set({ accessToken: token, userId: id, username }),
-      clearAuth: () => set({ accessToken: null, userId: null, username: null }),
+      refreshToken: null,
+      user: null,
+      setAuth: ({ token, refreshToken, user }) =>
+        set({ accessToken: token, refreshToken: refreshToken, user: user }),
+      clearAuth: () => set({ accessToken: null, refreshToken: null, user: null }),
     }),
     {
       name: 'auth-storage',

@@ -1,0 +1,9 @@
+query GetCvs {
+  cvs {
+    id
+    created_at
+    name
+    education
+    description
+  }
+}

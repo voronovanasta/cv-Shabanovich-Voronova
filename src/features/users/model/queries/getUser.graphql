@@ -1,13 +1,30 @@
-query getUser($id: ID!) {
-  user(id: $id) {
+query GetUser($userId: ID!) {
+  user(userId: $userId) {
     id
-    username
+    created_at
     email
-    firstName
-    lastName
-    departmentId
-    positionId
-    skills
-    languages
+    is_verified
+    role
+    department_name
+    position_name
+    department {
+      id
+      name
+    }
+    position {
+      id
+      name
+    }
+    profile {
+      id
+      first_name
+      last_name
+      avatar
+    }
+    cvs {
+      id
+      name
+      created_at
+    }
   }
 }

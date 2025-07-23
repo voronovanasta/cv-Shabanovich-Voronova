@@ -24,23 +24,23 @@
     }
   },
   "sidebar": {
-    "employees": "Сотрудники",
-    "skills": "Навыки",
-    "settings": "Настройки",
-    "languages": "Языки",
-    "cvs": "Резюме",
-    "profile": "Профиль",
-    "logout": "Выйти"
+    "employees": "Employees",
+    "skills": "Skills",
+    "settings": "Settings",
+    "languages": "Languages",
+    "cvs": "CVs",
+    "profile": "Profile",
+    "logout": "Logout"
   },
   "settings": {
-    "appearance": "Внешний вид",
-    "language": "Язык",
-    "dark": "Темный",
-    "light": "Светлый"
+    "appearance": "Appearance",
+    "language": "Language",
+    "dark": "Dark",
+    "light": "Light"
   },
   "menu": {
-    "profile": "Профиль",
-    "settings": "Настройки",
-    "logout": "Выйти"
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }

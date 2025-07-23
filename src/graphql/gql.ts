@@ -14,35 +14,24 @@ import type { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-  'mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      id\n      username\n    }\n  }\n}': typeof types.LoginDocument;
-  'mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}': typeof types.RegisterDocument;
-
-  'mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}': typeof types.UpdateUserDocument;
-  'query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}': typeof types.GetUserDocument;
-
-  'mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}': typeof types.CreateCvDocument;
-  'query GetCVs {\n  cvs {\n    id\n    userId\n    name\n    summary\n    experience\n    education\n    skills\n    languages\n  }\n}': typeof types.GetCVsDocument;
-
-  'query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}': typeof types.GetUsersDocument;
+    "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      email\n      is_verified\n      profile {\n        first_name\n        last_name\n      }\n      role\n    }\n  }\n}": typeof types.SignupDocument,
+    "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      profile {\n        full_name\n        avatar\n      }\n    }\n  }\n}": typeof types.LoginDocument,
+    "mutation CreateCv($cv: CreateCvInput!) {\n  createCv(cv: $cv) {\n    id\n    created_at\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      categoryId\n      mastery\n    }\n    languages {\n      name\n      proficiency\n    }\n    projects {\n      id\n      name\n      internal_name\n      description\n      domain\n      start_date\n      end_date\n      environment\n      roles\n      responsibilities\n    }\n  }\n}": typeof types.CreateCvDocument,
+    "mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}": typeof types.DeleteCvDocument,
+    "query GetCvs {\n  cvs {\n    id\n    created_at\n    name\n    education\n    description\n  }\n}": typeof types.GetCvsDocument,
+    "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}": typeof types.UpdateUserDocument,
+    "query GetUser($userId: ID!) {\n  user(userId: $userId) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}": typeof types.GetUserDocument,
+    "query GetUsers {\n  users {\n    id\n    email\n    role\n    profile {\n      id\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n  }\n}": typeof types.GetUsersDocument,
 };
 const documents: Documents = {
-  'mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      id\n      username\n    }\n  }\n}':
-    types.LoginDocument,
-  'mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}':
-    types.RegisterDocument,
-
-  'mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}':
-    types.UpdateUserDocument,
-  'query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}':
-    types.GetUserDocument,
-
-  'mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}':
-    types.CreateCvDocument,
-  'query GetCVs {\n  cvs {\n    id\n    userId\n    name\n    summary\n    experience\n    education\n    skills\n    languages\n  }\n}':
-    types.GetCVsDocument,
-
-  'query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}':
-    types.GetUsersDocument,
+    "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      email\n      is_verified\n      profile {\n        first_name\n        last_name\n      }\n      role\n    }\n  }\n}": types.SignupDocument,
+    "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      profile {\n        full_name\n        avatar\n      }\n    }\n  }\n}": types.LoginDocument,
+    "mutation CreateCv($cv: CreateCvInput!) {\n  createCv(cv: $cv) {\n    id\n    created_at\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      categoryId\n      mastery\n    }\n    languages {\n      name\n      proficiency\n    }\n    projects {\n      id\n      name\n      internal_name\n      description\n      domain\n      start_date\n      end_date\n      environment\n      roles\n      responsibilities\n    }\n  }\n}": types.CreateCvDocument,
+    "mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}": types.DeleteCvDocument,
+    "query GetCvs {\n  cvs {\n    id\n    created_at\n    name\n    education\n    description\n  }\n}": types.GetCvsDocument,
+    "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}": types.UpdateUserDocument,
+    "query GetUser($userId: ID!) {\n  user(userId: $userId) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}": types.GetUserDocument,
+    "query GetUsers {\n  users {\n    id\n    email\n    role\n    profile {\n      id\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n  }\n}": types.GetUsersDocument,
 };
 
 /**
@@ -62,48 +51,38 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: 'mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      id\n      username\n    }\n  }\n}'
-): (typeof documents)['mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      id\n      username\n    }\n  }\n}'];
+export function graphql(source: "mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      email\n      is_verified\n      profile {\n        first_name\n        last_name\n      }\n      role\n    }\n  }\n}"): (typeof documents)["mutation Signup($auth: AuthInput!) {\n  signup(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      email\n      is_verified\n      profile {\n        first_name\n        last_name\n      }\n      role\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: 'mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}'
-): (typeof documents)['mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}'];
+export function graphql(source: "query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      profile {\n        full_name\n        avatar\n      }\n    }\n  }\n}"): (typeof documents)["query Login($auth: AuthInput!) {\n  login(auth: $auth) {\n    access_token\n    refresh_token\n    user {\n      id\n      profile {\n        full_name\n        avatar\n      }\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-
-export function graphql(
-  source: 'mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}'
-): (typeof documents)['mutation UpdateUser($id: ID!, $input: UserInput) {\n  updateUser(id: $id, input: $input) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}'];
+export function graphql(source: "mutation CreateCv($cv: CreateCvInput!) {\n  createCv(cv: $cv) {\n    id\n    created_at\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      categoryId\n      mastery\n    }\n    languages {\n      name\n      proficiency\n    }\n    projects {\n      id\n      name\n      internal_name\n      description\n      domain\n      start_date\n      end_date\n      environment\n      roles\n      responsibilities\n    }\n  }\n}"): (typeof documents)["mutation CreateCv($cv: CreateCvInput!) {\n  createCv(cv: $cv) {\n    id\n    created_at\n    name\n    education\n    description\n    user {\n      id\n      email\n    }\n    skills {\n      name\n      categoryId\n      mastery\n    }\n    languages {\n      name\n      proficiency\n    }\n    projects {\n      id\n      name\n      internal_name\n      description\n      domain\n      start_date\n      end_date\n      environment\n      roles\n      responsibilities\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: 'query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}'
-): (typeof documents)['query getUser($id: ID!) {\n  user(id: $id) {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    skills\n    languages\n  }\n}'];
-
-export function graphql(
-  source: 'mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}'
-): (typeof documents)['mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}'];
+export function graphql(source: "mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}"): (typeof documents)["mutation DeleteCv($cv: DeleteCvInput!) {\n  deleteCv(cv: $cv) {\n    affected\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: 'query GetCVs {\n  cvs {\n    id\n    userId\n    name\n    summary\n    experience\n    education\n    skills\n    languages\n  }\n}'
-): (typeof documents)['query GetCVs {\n  cvs {\n    id\n    userId\n    name\n    summary\n    experience\n    education\n    skills\n    languages\n  }\n}'];
+export function graphql(source: "query GetCvs {\n  cvs {\n    id\n    created_at\n    name\n    education\n    description\n  }\n}"): (typeof documents)["query GetCvs {\n  cvs {\n    id\n    created_at\n    name\n    education\n    description\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(
-  source: 'query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}'
-): (typeof documents)['query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}'];
+export function graphql(source: "mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}"): (typeof documents)["mutation UpdateUser($user: UpdateUserInput!) {\n  updateUser(user: $user) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetUser($userId: ID!) {\n  user(userId: $userId) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}"): (typeof documents)["query GetUser($userId: ID!) {\n  user(userId: $userId) {\n    id\n    created_at\n    email\n    is_verified\n    role\n    department_name\n    position_name\n    department {\n      id\n      name\n    }\n    position {\n      id\n      name\n    }\n    profile {\n      id\n      first_name\n      last_name\n      avatar\n    }\n    cvs {\n      id\n      name\n      created_at\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GetUsers {\n  users {\n    id\n    email\n    role\n    profile {\n      id\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n  }\n}"): (typeof documents)["query GetUsers {\n  users {\n    id\n    email\n    role\n    profile {\n      id\n      first_name\n      last_name\n      full_name\n      avatar\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
 }
 
-export type DocumentType<TDocumentNode extends DocumentNode<any, any>> =
-  TDocumentNode extends DocumentNode<infer TType, any> ? TType : never;
+export type DocumentType<TDocumentNode extends DocumentNode<any, any>> = TDocumentNode extends DocumentNode<  infer TType,  any>  ? TType  : never;

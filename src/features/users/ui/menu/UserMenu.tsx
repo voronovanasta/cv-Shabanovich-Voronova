@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useLogout } from '../../../features/auth/lib/logout';
+import { useLogout } from '../../../auth/lib/logout';
 
 interface UserMenuProps {
   anchorEl: null | HTMLElement;

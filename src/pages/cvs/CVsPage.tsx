@@ -14,30 +14,30 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchBar from '../../shared/ui/searchbar/SearchBar';
-import useGetCVsList from '../../features/cvc/model/useGetCVsList';
+import useGetCVsList from '../../features/cvs/model/useGetCVsList';
 import { useState } from 'react';
 import CreateCvModal from '../../shared/ui/modal/CreateCVModal';
-import useCreateCV from '../../features/cvc/model/useCreateCV';
+//import useCreateCV from '../../features/cvs/model/useCreateCV';
 import type ICreateCVFormData from '../../shared/ui/modal/types';
 
 const CVsPage = () => {
   const { data } = useGetCVsList();
   const [open, setOpen] = useState(false);
-  const createCVMutation = useCreateCV();
+  //const createCVMutation = useCreateCV();
   const handleCreateCv = (data: ICreateCVFormData) => {
     console.log('CV submitted:', data);
-    createCVMutation.mutate({
-      input: {
-        // TODO: email: data.email,
-        userId: 'abc123',
-        name: data.name,
-        summary: data.summary,
-        education: [data.education],
-        experience: [],
-        skills: [],
-        languages: [],
-      },
-    });
+    // createCVMutation.mutate({
+    //    input: {
+    //     // TODO: email: data.email,
+    //     userId: 'abc123',
+    //     name: data.name,
+    //     summary: data.summary,
+    //     education: [data.education],
+    //     experience: [],
+    //     skills: [],
+    //     languages: [],
+    //   },
+    // });
   };
   return (
     <Box color='white'>
@@ -86,7 +86,7 @@ const CVsPage = () => {
                 <TableRow>
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.name}</TableCell>
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.education}</TableCell>
-                  <TableCell sx={{ borderBottom: 'none' }}>{cv.userId}</TableCell>
+                  {/* <TableCell sx={{ borderBottom: 'none' }}>{cv.userId}</TableCell> */}
                   <TableCell sx={{ textAlign: 'right', borderBottom: 'none', pt: 3 }}>
                     <IconButton>
                       <MoreVertIcon />
@@ -95,9 +95,9 @@ const CVsPage = () => {
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={4} sx={{ pt: 0 }}>
-                    <Typography variant='body2' sx={{ color: 'gray' }}>
+                    {/* <Typography variant='body2' sx={{ color: 'gray' }}>
                       {cv.summary}
-                    </Typography>
+                    </Typography> */}
                   </TableCell>
                 </TableRow>
               </Fragment>
