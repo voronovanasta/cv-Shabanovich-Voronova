@@ -1,12 +1,34 @@
-mutation CreateCV($input: CVInput!) {
-  createCV(input: $input) {
+mutation CreateCv($cv: CreateCvInput!) {
+  createCv(cv: $cv) {
     id
-    userId
+    created_at
     name
-    summary
     education
-    experience
-    skills
-    languages
+    description
+    user {
+      id
+      email
+    }
+    skills {
+      name
+      categoryId
+      mastery
+    }
+    languages {
+      name
+      proficiency
+    }
+    projects {
+      id
+      name
+      internal_name
+      description
+      domain
+      start_date
+      end_date
+      environment
+      roles
+      responsibilities
+    }
   }
 }

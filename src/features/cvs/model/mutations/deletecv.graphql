@@ -1,3 +1,5 @@
-mutation DeleteCV($id: ID!) {
-  deleteCV(id: $id)
+mutation DeleteCv($cv: DeleteCvInput!) {
+  deleteCv(cv: $cv) {
+    affected
+  }
 }

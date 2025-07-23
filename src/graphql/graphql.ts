@@ -6,485 +6,1050 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
+  [_ in K]?: never;
+};
+export type Incremental<T> =
+  | T
+  | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
+  /** The `Void` scalar type represents a null variable. */
+  Void: { input: any; output: any };
 };
 
-export type CvInput = {
-  education: Array<Scalars['String']['input']>;
-  experience?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  languages?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  name: Scalars['String']['input'];
-  skills?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  summary: Scalars['String']['input'];
-  userId: Scalars['String']['input'];
+export type AddCvProjectInput = {
+  cvId: Scalars['ID']['input'];
+  end_date?: InputMaybe<Scalars['String']['input']>;
+  projectId: Scalars['ID']['input'];
+  responsibilities: Array<Scalars['String']['input']>;
+  roles: Array<Scalars['String']['input']>;
+  start_date: Scalars['String']['input'];
 };
 
-export type CvType = {
-  __typename?: 'CVType';
-  education: Array<Scalars['String']['output']>;
-  experience?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  id: Scalars['ID']['output'];
-  languages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  name: Scalars['String']['output'];
-  skills?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  summary: Scalars['String']['output'];
-  userId?: Maybe<Scalars['String']['output']>;
-};
-
-export type DepartmentInput = {
-  description: Scalars['String']['input'];
+export type AddCvSkillInput = {
+  categoryId?: InputMaybe<Scalars['ID']['input']>;
+  cvId: Scalars['ID']['input'];
+  mastery: Mastery;
   name: Scalars['String']['input'];
 };
 
-export type DepartmentType = {
-  __typename?: 'DepartmentType';
-  description: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-};
-
-export type LanguageInput = {
-  level: Scalars['String']['input'];
+export type AddProfileLanguageInput = {
   name: Scalars['String']['input'];
+  proficiency: Proficiency;
+  userId: Scalars['ID']['input'];
 };
 
-export type LanguageType = {
-  __typename?: 'LanguageType';
-  id: Scalars['ID']['output'];
-  level: Scalars['String']['output'];
-  name: Scalars['String']['output'];
+export type AddProfileSkillInput = {
+  categoryId?: InputMaybe<Scalars['ID']['input']>;
+  mastery: Mastery;
+  name: Scalars['String']['input'];
+  userId: Scalars['ID']['input'];
 };
 
-export type LoginInput = {
+export type AuthInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
 };
 
-export type LoginResponse = {
-  __typename?: 'LoginResponse';
-  accessToken: Scalars['String']['output'];
-  user: UserType;
+export type AuthResult = {
+  __typename?: 'AuthResult';
+  access_token: Scalars['String']['output'];
+  refresh_token: Scalars['String']['output'];
+  user: User;
 };
+
+export type CreateCvInput = {
+  description: Scalars['String']['input'];
+  education?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  userId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+export type CreateDepartmentInput = {
+  name: Scalars['String']['input'];
+};
+
+export type CreateLanguageInput = {
+  iso2: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  native_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreatePositionInput = {
+  name: Scalars['String']['input'];
+};
+
+export type CreateProfileInput = {
+  first_name?: InputMaybe<Scalars['String']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateProjectInput = {
+  description: Scalars['String']['input'];
+  domain: Scalars['String']['input'];
+  end_date?: InputMaybe<Scalars['String']['input']>;
+  environment: Array<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  start_date: Scalars['String']['input'];
+};
+
+export type CreateSkillInput = {
+  categoryId?: InputMaybe<Scalars['ID']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type CreateUserInput = {
+  auth: AuthInput;
+  cvsIds: Array<Scalars['String']['input']>;
+  departmentId?: InputMaybe<Scalars['ID']['input']>;
+  positionId?: InputMaybe<Scalars['ID']['input']>;
+  profile: CreateProfileInput;
+  role: UserRole;
+};
+
+export type Cv = {
+  __typename?: 'Cv';
+  created_at: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  education?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  languages: Array<LanguageProficiency>;
+  name: Scalars['String']['output'];
+  projects?: Maybe<Array<CvProject>>;
+  skills: Array<SkillMastery>;
+  user?: Maybe<User>;
+};
+
+export type CvProject = {
+  __typename?: 'CvProject';
+  description: Scalars['String']['output'];
+  domain: Scalars['String']['output'];
+  end_date?: Maybe<Scalars['String']['output']>;
+  environment: Array<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  internal_name: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  project: Project;
+  responsibilities: Array<Scalars['String']['output']>;
+  roles: Array<Scalars['String']['output']>;
+  start_date: Scalars['String']['output'];
+};
+
+export type DeleteAvatarInput = {
+  userId: Scalars['ID']['input'];
+};
+
+export type DeleteCvInput = {
+  cvId: Scalars['ID']['input'];
+};
+
+export type DeleteCvSkillInput = {
+  cvId: Scalars['ID']['input'];
+  name: Array<Scalars['String']['input']>;
+};
+
+export type DeleteDepartmentInput = {
+  departmentId: Scalars['ID']['input'];
+};
+
+export type DeleteLanguageInput = {
+  languageId: Scalars['ID']['input'];
+};
+
+export type DeletePositionInput = {
+  positionId: Scalars['ID']['input'];
+};
+
+export type DeleteProfileInput = {
+  userId: Scalars['ID']['input'];
+};
+
+export type DeleteProfileLanguageInput = {
+  name: Array<Scalars['String']['input']>;
+  userId: Scalars['ID']['input'];
+};
+
+export type DeleteProfileSkillInput = {
+  name: Array<Scalars['String']['input']>;
+  userId: Scalars['ID']['input'];
+};
+
+export type DeleteProjectInput = {
+  projectId: Scalars['ID']['input'];
+};
+
+export type DeleteResult = {
+  __typename?: 'DeleteResult';
+  affected: Scalars['Int']['output'];
+};
+
+export type DeleteSkillInput = {
+  skillId: Scalars['ID']['input'];
+};
+
+export type Department = {
+  __typename?: 'Department';
+  created_at: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type ExportPdfInput = {
+  html: Scalars['String']['input'];
+  margin?: InputMaybe<MarginInput>;
+};
+
+export type ForgotPasswordInput = {
+  email: Scalars['String']['input'];
+};
+
+export type Language = {
+  __typename?: 'Language';
+  created_at: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  iso2: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  native_name?: Maybe<Scalars['String']['output']>;
+};
+
+export type LanguageProficiency = {
+  __typename?: 'LanguageProficiency';
+  name: Scalars['String']['output'];
+  proficiency: Proficiency;
+};
+
+export type LanguageProficiencyInput = {
+  name: Scalars['String']['input'];
+  proficiency: Proficiency;
+};
+
+export type Mail = {
+  __typename?: 'Mail';
+  created_at: Scalars['String']['output'];
+  email: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  otp: Scalars['String']['output'];
+};
+
+export type MarginInput = {
+  bottom: Scalars['String']['input'];
+  left: Scalars['String']['input'];
+  right: Scalars['String']['input'];
+  top: Scalars['String']['input'];
+};
+
+export enum Mastery {
+  Advanced = 'Advanced',
+  Competent = 'Competent',
+  Expert = 'Expert',
+  Novice = 'Novice',
+  Proficient = 'Proficient',
+}
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createCV: CvType;
-  createDepartment: DepartmentType;
-  createLanguage: LanguageType;
-  createPosition: PositionType;
-  createProject: ProjectType;
-  createSkill: SkillType;
-  createUser: UserType;
-  deleteCV: Scalars['Boolean']['output'];
-  deleteDepartment: Scalars['Boolean']['output'];
-  deleteLanguage: Scalars['Boolean']['output'];
-  deletePosition: Scalars['Boolean']['output'];
-  deleteProject: Scalars['Boolean']['output'];
-  deleteSkill: Scalars['Boolean']['output'];
-  deleteUser: Scalars['Boolean']['output'];
-  login?: Maybe<LoginResponse>;
-  updateCV?: Maybe<CvType>;
-  updateDepartment?: Maybe<DepartmentType>;
-  updateLanguage?: Maybe<LanguageType>;
-  updatePosition?: Maybe<PositionType>;
-  updateProject?: Maybe<ProjectType>;
-  updateSkill?: Maybe<SkillType>;
-  updateUser?: Maybe<UserType>;
+  addCvProject: Cv;
+  addCvSkill: Cv;
+  addProfileLanguage: Profile;
+  addProfileSkill: Profile;
+  createCv: Cv;
+  createDepartment: Department;
+  createLanguage: Language;
+  createPosition: Position;
+  createProject: Project;
+  createSkill: Skill;
+  createUser: User;
+  deleteAvatar?: Maybe<Scalars['Void']['output']>;
+  deleteCv: DeleteResult;
+  deleteCvSkill: Cv;
+  deleteDepartment: DeleteResult;
+  deleteLanguage: DeleteResult;
+  deletePosition: DeleteResult;
+  deleteProfileLanguage: Profile;
+  deleteProfileSkill: Profile;
+  deleteProject: DeleteResult;
+  deleteSkill: DeleteResult;
+  deleteUser: DeleteResult;
+  exportPdf: Scalars['String']['output'];
+  forgotPassword?: Maybe<Scalars['Void']['output']>;
+  removeCvProject: Cv;
+  resetPassword?: Maybe<Scalars['Void']['output']>;
+  signup: AuthResult;
+  updateCv: Cv;
+  updateCvProject: Cv;
+  updateCvSkill: Cv;
+  updateDepartment: Department;
+  updateLanguage: Language;
+  updatePosition: Position;
+  updateProfile: Profile;
+  updateProfileLanguage: Profile;
+  updateProfileSkill: Profile;
+  updateProject: Project;
+  updateSkill: Skill;
+  updateToken: UpdateTokenResult;
+  updateUser: User;
+  uploadAvatar: Scalars['String']['output'];
+  verifyMail?: Maybe<Scalars['Void']['output']>;
 };
 
+export type MutationAddCvProjectArgs = {
+  project: AddCvProjectInput;
+};
+
+export type MutationAddCvSkillArgs = {
+  skill: AddCvSkillInput;
+};
+
+export type MutationAddProfileLanguageArgs = {
+  language: AddProfileLanguageInput;
+};
+
+export type MutationAddProfileSkillArgs = {
+  skill: AddProfileSkillInput;
+};
 
 export type MutationCreateCvArgs = {
-  input: CvInput;
+  cv: CreateCvInput;
 };
-
 
 export type MutationCreateDepartmentArgs = {
-  input: DepartmentInput;
+  department: CreateDepartmentInput;
 };
-
 
 export type MutationCreateLanguageArgs = {
-  input: LanguageInput;
+  language: CreateLanguageInput;
 };
-
 
 export type MutationCreatePositionArgs = {
-  input: PositionInput;
+  position: CreatePositionInput;
 };
-
 
 export type MutationCreateProjectArgs = {
-  input: ProjectInput;
+  project: CreateProjectInput;
 };
-
 
 export type MutationCreateSkillArgs = {
-  input: SkillInput;
+  skill: CreateSkillInput;
 };
-
 
 export type MutationCreateUserArgs = {
-  input: UserInput;
+  user: CreateUserInput;
 };
 
+export type MutationDeleteAvatarArgs = {
+  avatar: DeleteAvatarInput;
+};
 
 export type MutationDeleteCvArgs = {
-  id: Scalars['ID']['input'];
+  cv: DeleteCvInput;
 };
 
+export type MutationDeleteCvSkillArgs = {
+  skill: DeleteCvSkillInput;
+};
 
 export type MutationDeleteDepartmentArgs = {
-  id: Scalars['ID']['input'];
+  department: DeleteDepartmentInput;
 };
-
 
 export type MutationDeleteLanguageArgs = {
-  id: Scalars['ID']['input'];
+  language: DeleteLanguageInput;
 };
-
 
 export type MutationDeletePositionArgs = {
-  id: Scalars['ID']['input'];
+  position: DeletePositionInput;
 };
 
+export type MutationDeleteProfileLanguageArgs = {
+  language: DeleteProfileLanguageInput;
+};
+
+export type MutationDeleteProfileSkillArgs = {
+  skill: DeleteProfileSkillInput;
+};
 
 export type MutationDeleteProjectArgs = {
-  id: Scalars['ID']['input'];
+  project: DeleteProjectInput;
 };
-
 
 export type MutationDeleteSkillArgs = {
-  id: Scalars['ID']['input'];
+  skill: DeleteSkillInput;
 };
-
 
 export type MutationDeleteUserArgs = {
-  id: Scalars['ID']['input'];
+  userId: Scalars['ID']['input'];
 };
 
-
-export type MutationLoginArgs = {
-  input: LoginInput;
+export type MutationExportPdfArgs = {
+  pdf: ExportPdfInput;
 };
 
+export type MutationForgotPasswordArgs = {
+  auth: ForgotPasswordInput;
+};
+
+export type MutationRemoveCvProjectArgs = {
+  project: RemoveCvProjectInput;
+};
+
+export type MutationResetPasswordArgs = {
+  auth: ResetPasswordInput;
+};
+
+export type MutationSignupArgs = {
+  auth: AuthInput;
+};
 
 export type MutationUpdateCvArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<CvInput>;
+  cv: UpdateCvInput;
 };
 
+export type MutationUpdateCvProjectArgs = {
+  project: UpdateCvProjectInput;
+};
+
+export type MutationUpdateCvSkillArgs = {
+  skill: UpdateCvSkillInput;
+};
 
 export type MutationUpdateDepartmentArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<DepartmentInput>;
+  department: UpdateDepartmentInput;
 };
-
 
 export type MutationUpdateLanguageArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<LanguageInput>;
+  language: UpdateLanguageInput;
 };
-
 
 export type MutationUpdatePositionArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<PositionInput>;
+  position: UpdatePositionInput;
 };
 
+export type MutationUpdateProfileArgs = {
+  profile: UpdateProfileInput;
+};
+
+export type MutationUpdateProfileLanguageArgs = {
+  language: UpdateProfileLanguageInput;
+};
+
+export type MutationUpdateProfileSkillArgs = {
+  skill: UpdateProfileSkillInput;
+};
 
 export type MutationUpdateProjectArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<ProjectInput>;
+  project: UpdateProjectInput;
 };
-
 
 export type MutationUpdateSkillArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<SkillInput>;
+  skill: UpdateSkillInput;
 };
-
 
 export type MutationUpdateUserArgs = {
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<UserInput>;
+  user: UpdateUserInput;
 };
 
-export type PositionInput = {
-  description: Scalars['String']['input'];
-  name: Scalars['String']['input'];
+export type MutationUploadAvatarArgs = {
+  avatar: UploadAvatarInput;
 };
 
-export type PositionType = {
-  __typename?: 'PositionType';
-  description: Scalars['String']['output'];
+export type MutationVerifyMailArgs = {
+  mail: VerifyMailInput;
+};
+
+export type Position = {
+  __typename?: 'Position';
+  created_at: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
 };
 
-export type ProjectInput = {
-  description: Scalars['String']['input'];
-  endDate: Scalars['String']['input'];
-  members: Array<Scalars['String']['input']>;
-  name: Scalars['String']['input'];
-  startDate: Scalars['String']['input'];
+export enum Proficiency {
+  A1 = 'A1',
+  A2 = 'A2',
+  B1 = 'B1',
+  B2 = 'B2',
+  C1 = 'C1',
+  C2 = 'C2',
+  Native = 'Native',
+}
+
+export type Profile = {
+  __typename?: 'Profile';
+  avatar?: Maybe<Scalars['String']['output']>;
+  created_at: Scalars['String']['output'];
+  first_name?: Maybe<Scalars['String']['output']>;
+  full_name?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  languages: Array<LanguageProficiency>;
+  last_name?: Maybe<Scalars['String']['output']>;
+  skills: Array<SkillMastery>;
 };
 
-export type ProjectType = {
-  __typename?: 'ProjectType';
+export type Project = {
+  __typename?: 'Project';
+  created_at: Scalars['String']['output'];
   description: Scalars['String']['output'];
-  endDate: Scalars['String']['output'];
+  domain: Scalars['String']['output'];
+  end_date?: Maybe<Scalars['String']['output']>;
+  environment: Array<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
-  members: Array<Scalars['String']['output']>;
+  internal_name: Scalars['String']['output'];
   name: Scalars['String']['output'];
-  startDate: Scalars['String']['output'];
+  start_date: Scalars['String']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  cv?: Maybe<CvType>;
-  cvs: Array<CvType>;
-  department?: Maybe<DepartmentType>;
-  departments: Array<DepartmentType>;
-  language?: Maybe<LanguageType>;
-  languages: Array<LanguageType>;
-  position?: Maybe<PositionType>;
-  positions: Array<PositionType>;
-  project?: Maybe<ProjectType>;
-  projects: Array<ProjectType>;
-  skill?: Maybe<SkillType>;
-  skills: Array<SkillType>;
-  user?: Maybe<UserType>;
-  users: Array<UserType>;
+  cv: Cv;
+  cvs: Array<Cv>;
+  departments: Array<Department>;
+  languages: Array<Maybe<Language>>;
+  login: AuthResult;
+  position: Position;
+  positions: Array<Position>;
+  profile: Profile;
+  project: Project;
+  projects: Array<Project>;
+  skillCategories: Array<SkillCategory>;
+  skills: Array<Skill>;
+  user: User;
+  users: Array<User>;
 };
-
 
 export type QueryCvArgs = {
-  id: Scalars['ID']['input'];
+  cvId: Scalars['ID']['input'];
 };
 
-
-export type QueryDepartmentArgs = {
-  id: Scalars['ID']['input'];
+export type QueryLoginArgs = {
+  auth: AuthInput;
 };
-
-
-export type QueryLanguageArgs = {
-  id: Scalars['ID']['input'];
-};
-
 
 export type QueryPositionArgs = {
   id: Scalars['ID']['input'];
 };
 
+export type QueryProfileArgs = {
+  userId: Scalars['ID']['input'];
+};
 
 export type QueryProjectArgs = {
-  id: Scalars['ID']['input'];
+  projectId: Scalars['ID']['input'];
 };
-
-
-export type QuerySkillArgs = {
-  id: Scalars['ID']['input'];
-};
-
 
 export type QueryUserArgs = {
-  id: Scalars['ID']['input'];
+  userId: Scalars['ID']['input'];
 };
 
-export type SkillInput = {
-  description: Scalars['String']['input'];
-  name: Scalars['String']['input'];
+export type RemoveCvProjectInput = {
+  cvId: Scalars['ID']['input'];
+  projectId: Scalars['ID']['input'];
 };
 
-export type SkillType = {
-  __typename?: 'SkillType';
-  description: Scalars['String']['output'];
+export type ResetPasswordInput = {
+  newPassword: Scalars['String']['input'];
+};
+
+export type Skill = {
+  __typename?: 'Skill';
+  category?: Maybe<SkillCategory>;
+  category_name?: Maybe<Scalars['String']['output']>;
+  category_parent_name?: Maybe<Scalars['String']['output']>;
+  created_at: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
 };
 
-export type UserInput = {
-  departmentId?: InputMaybe<Scalars['String']['input']>;
-  email: Scalars['String']['input'];
-  firstName?: InputMaybe<Scalars['String']['input']>;
-  languages?: InputMaybe<Array<Scalars['String']['input']>>;
-  lastName?: InputMaybe<Scalars['String']['input']>;
-  password: Scalars['String']['input'];
-  positionId?: InputMaybe<Scalars['String']['input']>;
-  skills?: InputMaybe<Array<Scalars['String']['input']>>;
-  username?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type UserType = {
-  __typename?: 'UserType';
-  departmentId?: Maybe<Scalars['String']['output']>;
-  email: Scalars['String']['output'];
-  firstName?: Maybe<Scalars['String']['output']>;
+export type SkillCategory = {
+  __typename?: 'SkillCategory';
+  children: Array<SkillCategory>;
   id: Scalars['ID']['output'];
-  languages?: Maybe<Array<Scalars['String']['output']>>;
-  lastName?: Maybe<Scalars['String']['output']>;
-  positionId?: Maybe<Scalars['String']['output']>;
-  skills?: Maybe<Array<Scalars['String']['output']>>;
-  username?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  order: Scalars['Int']['output'];
+  parent?: Maybe<SkillCategory>;
 };
 
-export type LoginMutationVariables = Exact<{
-  input: LoginInput;
+export type SkillMastery = {
+  __typename?: 'SkillMastery';
+  categoryId?: Maybe<Scalars['ID']['output']>;
+  mastery: Mastery;
+  name: Scalars['String']['output'];
+};
+
+export type SkillMasteryInput = {
+  categoryId?: InputMaybe<Scalars['ID']['input']>;
+  mastery: Mastery;
+  name: Scalars['String']['input'];
+};
+
+export type UpdateCvInput = {
+  cvId: Scalars['ID']['input'];
+  description: Scalars['String']['input'];
+  education?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+export type UpdateCvProjectInput = {
+  cvId: Scalars['ID']['input'];
+  end_date?: InputMaybe<Scalars['String']['input']>;
+  projectId: Scalars['ID']['input'];
+  responsibilities: Array<Scalars['String']['input']>;
+  roles: Array<Scalars['String']['input']>;
+  start_date: Scalars['String']['input'];
+};
+
+export type UpdateCvSkillInput = {
+  categoryId?: InputMaybe<Scalars['ID']['input']>;
+  cvId: Scalars['ID']['input'];
+  mastery: Mastery;
+  name: Scalars['String']['input'];
+};
+
+export type UpdateDepartmentInput = {
+  departmentId: Scalars['ID']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type UpdateLanguageInput = {
+  iso2: Scalars['String']['input'];
+  languageId: Scalars['ID']['input'];
+  name: Scalars['String']['input'];
+  native_name?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type UpdatePositionInput = {
+  name: Scalars['String']['input'];
+  positionId: Scalars['ID']['input'];
+};
+
+export type UpdateProfileInput = {
+  first_name?: InputMaybe<Scalars['String']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
+  userId: Scalars['ID']['input'];
+};
+
+export type UpdateProfileLanguageInput = {
+  name: Scalars['String']['input'];
+  proficiency: Proficiency;
+  userId: Scalars['ID']['input'];
+};
+
+export type UpdateProfileSkillInput = {
+  categoryId?: InputMaybe<Scalars['ID']['input']>;
+  mastery: Mastery;
+  name: Scalars['String']['input'];
+  userId: Scalars['ID']['input'];
+};
+
+export type UpdateProjectInput = {
+  description: Scalars['String']['input'];
+  domain: Scalars['String']['input'];
+  end_date?: InputMaybe<Scalars['String']['input']>;
+  environment: Array<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+  projectId: Scalars['ID']['input'];
+  start_date: Scalars['String']['input'];
+};
+
+export type UpdateSkillInput = {
+  categoryId?: InputMaybe<Scalars['ID']['input']>;
+  name: Scalars['String']['input'];
+  skillId: Scalars['ID']['input'];
+};
+
+export type UpdateTokenResult = {
+  __typename?: 'UpdateTokenResult';
+  access_token: Scalars['String']['output'];
+  refresh_token: Scalars['String']['output'];
+};
+
+export type UpdateUserInput = {
+  cvsIds?: InputMaybe<Array<Scalars['String']['input']>>;
+  departmentId?: InputMaybe<Scalars['ID']['input']>;
+  positionId?: InputMaybe<Scalars['ID']['input']>;
+  role?: InputMaybe<UserRole>;
+  userId: Scalars['ID']['input'];
+};
+
+export type UploadAvatarInput = {
+  base64: Scalars['String']['input'];
+  size: Scalars['Int']['input'];
+  type: Scalars['String']['input'];
+  userId: Scalars['ID']['input'];
+};
+
+export type User = {
+  __typename?: 'User';
+  created_at: Scalars['String']['output'];
+  cvs?: Maybe<Array<Cv>>;
+  department?: Maybe<Department>;
+  department_name?: Maybe<Scalars['String']['output']>;
+  email: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  is_verified: Scalars['Boolean']['output'];
+  position?: Maybe<Position>;
+  position_name?: Maybe<Scalars['String']['output']>;
+  profile: Profile;
+  role: UserRole;
+};
+
+export enum UserRole {
+  Admin = 'Admin',
+  Employee = 'Employee',
+}
+
+export type VerifyMailInput = {
+  otp: Scalars['String']['input'];
+};
+
+export type SignupMutationVariables = Exact<{
+  auth: AuthInput;
 }>;
 
+export type SignupMutation = {
+  __typename?: 'Mutation';
+  signup: {
+    __typename?: 'AuthResult';
+    access_token: string;
+    refresh_token: string;
+    user: {
+      __typename?: 'User';
+      id: string;
+      email: string;
+      is_verified: boolean;
+      role: UserRole;
+      profile: { __typename?: 'Profile'; first_name?: string | null; last_name?: string | null };
+    };
+  };
+};
 
-export type LoginMutation = { __typename?: 'Mutation', login?: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'UserType', id: string, username?: string | null } } | null };
-
-export type RegisterMutationVariables = Exact<{
-  input: UserInput;
+export type LoginQueryVariables = Exact<{
+  auth: AuthInput;
 }>;
 
-
-export type RegisterMutation = { __typename?: 'Mutation', createUser: { __typename?: 'UserType', id: string, email: string } };
+export type LoginQuery = {
+  __typename?: 'Query';
+  login: {
+    __typename?: 'AuthResult';
+    access_token: string;
+    refresh_token: string;
+    user: {
+      __typename?: 'User';
+      id: string;
+      profile: { __typename?: 'Profile'; full_name?: string | null; avatar?: string | null };
+    };
+  };
+};
 
 export type CreateCvMutationVariables = Exact<{
-  input: CvInput;
+  cv: CreateCvInput;
 }>;
 
-
-export type CreateCvMutation = { __typename?: 'Mutation', createCV: { __typename?: 'CVType', id: string, userId?: string | null, name: string, summary: string, education: Array<string>, experience?: Array<string | null> | null, skills?: Array<string | null> | null, languages?: Array<string | null> | null } };
+export type CreateCvMutation = {
+  __typename?: 'Mutation';
+  createCv: {
+    __typename?: 'Cv';
+    id: string;
+    created_at: string;
+    name: string;
+    education?: string | null;
+    description: string;
+    user?: { __typename?: 'User'; id: string; email: string } | null;
+    skills: Array<{
+      __typename?: 'SkillMastery';
+      name: string;
+      categoryId?: string | null;
+      mastery: Mastery;
+    }>;
+    languages: Array<{
+      __typename?: 'LanguageProficiency';
+      name: string;
+      proficiency: Proficiency;
+    }>;
+    projects?: Array<{
+      __typename?: 'CvProject';
+      id: string;
+      name: string;
+      internal_name: string;
+      description: string;
+      domain: string;
+      start_date: string;
+      end_date?: string | null;
+      environment: Array<string>;
+      roles: Array<string>;
+      responsibilities: Array<string>;
+    }> | null;
+  };
+};
 
 export type DeleteCvMutationVariables = Exact<{
-  id: Scalars['ID']['input'];
+  cv: DeleteCvInput;
 }>;
 
+export type DeleteCvMutation = {
+  __typename?: 'Mutation';
+  deleteCv: { __typename?: 'DeleteResult'; affected: number };
+};
 
-export type DeleteCvMutation = { __typename?: 'Mutation', deleteCV: boolean };
+export type GetCvsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetCVsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCVsQuery = { __typename?: 'Query', cvs: Array<{ __typename?: 'CVType', id: string, userId?: string | null, name: string, summary: string, experience?: Array<string | null> | null, education: Array<string>, skills?: Array<string | null> | null, languages?: Array<string | null> | null }> };
+export type GetCvsQuery = {
+  __typename?: 'Query';
+  cvs: Array<{
+    __typename?: 'Cv';
+    id: string;
+    created_at: string;
+    name: string;
+    education?: string | null;
+    description: string;
+  }>;
+};
 
 export type UpdateUserMutationVariables = Exact<{
-  id: Scalars['ID']['input'];
-  input?: InputMaybe<UserInput>;
+  user: UpdateUserInput;
 }>;
 
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser?: { __typename?: 'UserType', id: string, username?: string | null, email: string, firstName?: string | null, lastName?: string | null, departmentId?: string | null, positionId?: string | null, skills?: Array<string> | null, languages?: Array<string> | null } | null };
+export type UpdateUserMutation = {
+  __typename?: 'Mutation';
+  updateUser: {
+    __typename?: 'User';
+    id: string;
+    created_at: string;
+    email: string;
+    is_verified: boolean;
+    role: UserRole;
+    department_name?: string | null;
+    position_name?: string | null;
+    department?: { __typename?: 'Department'; id: string; name: string } | null;
+    position?: { __typename?: 'Position'; id: string; name: string } | null;
+    profile: {
+      __typename?: 'Profile';
+      id: string;
+      first_name?: string | null;
+      last_name?: string | null;
+      avatar?: string | null;
+    };
+    cvs?: Array<{ __typename?: 'Cv'; id: string; name: string; created_at: string }> | null;
+  };
+};
 
 export type GetUserQueryVariables = Exact<{
-  id: Scalars['ID']['input'];
+  userId: Scalars['ID']['input'];
 }>;
 
+export type GetUserQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    id: string;
+    created_at: string;
+    email: string;
+    is_verified: boolean;
+    role: UserRole;
+    department_name?: string | null;
+    position_name?: string | null;
+    department?: { __typename?: 'Department'; id: string; name: string } | null;
+    position?: { __typename?: 'Position'; id: string; name: string } | null;
+    profile: {
+      __typename?: 'Profile';
+      id: string;
+      first_name?: string | null;
+      last_name?: string | null;
+      avatar?: string | null;
+    };
+    cvs?: Array<{ __typename?: 'Cv'; id: string; name: string; created_at: string }> | null;
+  };
+};
 
-export type GetUserQuery = { __typename?: 'Query', user?: { __typename?: 'UserType', id: string, username?: string | null, email: string, firstName?: string | null, lastName?: string | null, departmentId?: string | null, positionId?: string | null, skills?: Array<string> | null, languages?: Array<string> | null } | null };
+export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetUsersQuery = {
+  __typename?: 'Query';
+  users: Array<{
+    __typename?: 'User';
+    id: string;
+    email: string;
+    role: UserRole;
+    profile: {
+      __typename?: 'Profile';
+      id: string;
+      first_name?: string | null;
+      last_name?: string | null;
+      full_name?: string | null;
+      avatar?: string | null;
+    };
+  }>;
+};
 
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'UserType', id: string, username?: string | null, email: string, firstName?: string | null, lastName?: string | null, departmentId?: string | null, positionId?: string | null, languages?: Array<string> | null, skills?: Array<string> | null }> };
-
-
-export const LoginDocument = gql`
-    mutation Login($input: LoginInput!) {
-  login(input: $input) {
-    accessToken
-    user {
-      id
-      username
+export const SignupDocument = gql`
+  mutation Signup($auth: AuthInput!) {
+    signup(auth: $auth) {
+      access_token
+      refresh_token
+      user {
+        id
+        email
+        is_verified
+        profile {
+          first_name
+          last_name
+        }
+        role
+      }
     }
   }
-}
-    ` as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
-export const RegisterDocument = gql`
-    mutation Register($input: UserInput!) {
-  createUser(input: $input) {
-    id
-    email
+` as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+export const LoginDocument = gql`
+  query Login($auth: AuthInput!) {
+    login(auth: $auth) {
+      access_token
+      refresh_token
+      user {
+        id
+        profile {
+          full_name
+          avatar
+        }
+      }
+    }
   }
-}
-    ` as unknown as DocumentNode<RegisterMutation, RegisterMutationVariables>;
+` as unknown as DocumentNode<LoginQuery, LoginQueryVariables>;
 export const CreateCvDocument = gql`
-    mutation CreateCV($input: CVInput!) {
-  createCV(input: $input) {
-    id
-    userId
-    name
-    summary
-    education
-    experience
-    skills
-    languages
+  mutation CreateCv($cv: CreateCvInput!) {
+    createCv(cv: $cv) {
+      id
+      created_at
+      name
+      education
+      description
+      user {
+        id
+        email
+      }
+      skills {
+        name
+        categoryId
+        mastery
+      }
+      languages {
+        name
+        proficiency
+      }
+      projects {
+        id
+        name
+        internal_name
+        description
+        domain
+        start_date
+        end_date
+        environment
+        roles
+        responsibilities
+      }
+    }
   }
-}
-    ` as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
+` as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
 export const DeleteCvDocument = gql`
-    mutation DeleteCV($id: ID!) {
-  deleteCV(id: $id)
-}
-    ` as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
-export const GetCVsDocument = gql`
-    query GetCVs {
-  cvs {
-    id
-    userId
-    name
-    summary
-    experience
-    education
-    skills
-    languages
+  mutation DeleteCv($cv: DeleteCvInput!) {
+    deleteCv(cv: $cv) {
+      affected
+    }
   }
-}
-    ` as unknown as DocumentNode<GetCVsQuery, GetCVsQueryVariables>;
+` as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
+export const GetCvsDocument = gql`
+  query GetCvs {
+    cvs {
+      id
+      created_at
+      name
+      education
+      description
+    }
+  }
+` as unknown as DocumentNode<GetCvsQuery, GetCvsQueryVariables>;
 export const UpdateUserDocument = gql`
-    mutation UpdateUser($id: ID!, $input: UserInput) {
-  updateUser(id: $id, input: $input) {
-    id
-    username
-    email
-    firstName
-    lastName
-    departmentId
-    positionId
-    skills
-    languages
+  mutation UpdateUser($user: UpdateUserInput!) {
+    updateUser(user: $user) {
+      id
+      created_at
+      email
+      is_verified
+      role
+      department_name
+      position_name
+      department {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      profile {
+        id
+        first_name
+        last_name
+        avatar
+      }
+      cvs {
+        id
+        name
+        created_at
+      }
+    }
   }
-}
-    ` as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
+` as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
 export const GetUserDocument = gql`
-    query getUser($id: ID!) {
-  user(id: $id) {
-    id
-    username
-    email
-    firstName
-    lastName
-    departmentId
-    positionId
-    skills
-    languages
+  query GetUser($userId: ID!) {
+    user(userId: $userId) {
+      id
+      created_at
+      email
+      is_verified
+      role
+      department_name
+      position_name
+      department {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      profile {
+        id
+        first_name
+        last_name
+        avatar
+      }
+      cvs {
+        id
+        name
+        created_at
+      }
+    }
   }
-}
-    ` as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
+` as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
 export const GetUsersDocument = gql`
-    query getUsers {
-  users {
-    id
-    username
-    email
-    firstName
-    lastName
-    departmentId
-    positionId
-    languages
-    skills
+  query GetUsers {
+    users {
+      id
+      email
+      role
+      profile {
+        id
+        first_name
+        last_name
+        full_name
+        avatar
+      }
+    }
   }
-}
-    ` as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+` as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;

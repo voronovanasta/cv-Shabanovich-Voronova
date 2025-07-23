@@ -1,0 +1,13 @@
+query Login($auth: AuthInput!) {
+  login(auth: $auth) {
+    access_token
+    refresh_token
+    user {
+      id
+      profile {
+        full_name
+        avatar
+      }
+    }
+  }
+}

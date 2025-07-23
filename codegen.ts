@@ -3,20 +3,20 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 const config: CodegenConfig = {
   schema: [
     {
-      'http://localhost:3000/api': {
+      'https://cv-project-js.inno.ws/api/graphql': {
         headers: {
-          Origin: 'http://localhost:3000',
+          Origin: 'https://cv-project-js.inno.ws/api/graphql',
         },
       },
     },
   ],
-  documents: ['src/features/**/*.{graphql,gql}', 'src/**/*.tsx', 'src/**/*.ts'],
+  documents: ['src/features/**/*.{graphql,gql}', 'src/**/*.tsx'],
   ignoreNoDocuments: true,
   generates: {
     './src/graphql/': {
       preset: 'client',
       presetConfig: {
-        fetcher: './src/graphql/execute#execute',
+        fetcher: './src/shared/api/execute#execute',
       },
       config: {
         documentMode: 'graphQLTag',

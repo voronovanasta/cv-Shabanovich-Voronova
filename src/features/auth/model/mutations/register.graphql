@@ -1,6 +1,16 @@
-mutation Register($input: UserInput!) {
-  createUser(input: $input) {
-    id
-    email
+mutation Signup($auth: AuthInput!) {
+  signup(auth: $auth) {
+    access_token
+    refresh_token
+    user {
+      id
+      email
+      is_verified
+      profile {
+        first_name
+        last_name
+      }
+      role
+    }
   }
 }

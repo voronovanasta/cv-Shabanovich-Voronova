@@ -1,13 +1,14 @@
-query getUsers {
+query GetUsers {
   users {
     id
-    username
     email
-    firstName
-    lastName
-    departmentId
-    positionId
-    languages
-    skills
+    role
+    profile {
+      id
+      first_name
+      last_name
+      full_name
+      avatar
+    }
   }
 }

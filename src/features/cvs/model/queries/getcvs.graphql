@@ -1,12 +1,9 @@
-query GetCVs {
+query GetCvs {
   cvs {
     id
-    userId
+    created_at
     name
-    summary
-    experience
     education
-    skills
-    languages
+    description
   }
 }
