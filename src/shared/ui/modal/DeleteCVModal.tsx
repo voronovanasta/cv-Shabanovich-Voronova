@@ -10,6 +10,7 @@ import {
   Box,
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import { useTranslation } from 'react-i18next';
 
 interface DeleteCvDialogProps {
   open: boolean;
@@ -19,6 +20,7 @@ interface DeleteCvDialogProps {
 }
 
 const DeleteCvDialog: React.FC<DeleteCvDialogProps> = ({ open, onClose, onConfirm, cvTitle }) => {
+  const { t } = useTranslation();
   return (
     <Dialog open={open} onClose={onClose} maxWidth='sm' fullWidth>
       <Box sx={{ position: 'absolute', top: 8, right: 8 }}>
@@ -26,15 +28,17 @@ const DeleteCvDialog: React.FC<DeleteCvDialogProps> = ({ open, onClose, onConfir
           <CloseIcon />
         </IconButton>
       </Box>
-      <DialogTitle>Delete CV</DialogTitle>
+      <DialogTitle>
+        {t('delete')} {t('cv.cv')}
+      </DialogTitle>
       <DialogContent>
         <Typography variant='body1' sx={{ mt: 1 }}>
-          Are you sure you want to delete CV <strong>{cvTitle}</strong>?
+          {t('cv.sure')} <strong>{cvTitle}</strong>?
         </Typography>
       </DialogContent>
       <DialogActions sx={{ justifyContent: 'center', pb: 3 }}>
         <Button variant='outlined' onClick={onClose} sx={{ minWidth: 120, borderRadius: '30px' }}>
-          Cancel
+          {t('cancel')}
         </Button>
         <Button
           variant='contained'
@@ -42,7 +46,7 @@ const DeleteCvDialog: React.FC<DeleteCvDialogProps> = ({ open, onClose, onConfir
           onClick={onConfirm}
           sx={{ minWidth: 120, borderRadius: '30px' }}
         >
-          Confirm
+          {t('confirm')}
         </Button>
       </DialogActions>
     </Dialog>

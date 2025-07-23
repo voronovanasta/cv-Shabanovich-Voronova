@@ -11,6 +11,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { useForm } from 'react-hook-form';
 import type ICreateCVFormData from './types';
+import { useTranslation } from 'react-i18next';
 
 interface CreateCvModalProps {
   open: boolean;
@@ -19,6 +20,7 @@ interface CreateCvModalProps {
 }
 
 export default function CreateCvModal({ open, onClose, onSubmitCv }: CreateCvModalProps) {
+  const { t } = useTranslation();
   const {
     register,
     handleSubmit,
@@ -40,7 +42,7 @@ export default function CreateCvModal({ open, onClose, onSubmitCv }: CreateCvMod
   return (
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth='sm'>
       <DialogTitle>
-        Create CV
+        {t('create')} {t('cv.cv')}
         <IconButton
           aria-label='close'
           onClick={handleClose}
@@ -53,24 +55,30 @@ export default function CreateCvModal({ open, onClose, onSubmitCv }: CreateCvMod
       <Box component='form' onSubmit={handleSubmit(onSubmit)}>
         <DialogContent sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <TextField
-            label='Name'
+            label={t('cv.name')}
             fullWidth
             {...register('name', { required: 'Name is required' })}
             error={!!errors.name}
             helperText={errors.name?.message}
           />
 
-          <TextField label='Education' fullWidth {...register('education')} />
+          <TextField label={t('cv.education')} fullWidth {...register('education')} />
 
-          <TextField label='Description' fullWidth multiline rows={5} {...register('summary')} />
+          <TextField
+            label={t('cv.description')}
+            fullWidth
+            multiline
+            rows={5}
+            {...register('summary')}
+          />
         </DialogContent>
 
         <DialogActions>
           <Button onClick={handleClose} variant='outlined'>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button type='submit' variant='contained'>
-            Create
+            {t('create')}
           </Button>
         </DialogActions>
       </Box>

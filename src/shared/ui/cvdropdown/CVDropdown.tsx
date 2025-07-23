@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useTranslation } from 'react-i18next';
 
 interface CvMenuProps {
   onDetails: () => void;
@@ -10,6 +11,7 @@ interface CvMenuProps {
 const CvMenu: React.FC<CvMenuProps> = ({ onDetails, onDelete }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { t } = useTranslation();
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -37,7 +39,7 @@ const CvMenu: React.FC<CvMenuProps> = ({ onDetails, onDelete }) => {
             onDetails();
           }}
         >
-          Details
+          {t('cv.details')}
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -45,7 +47,7 @@ const CvMenu: React.FC<CvMenuProps> = ({ onDetails, onDelete }) => {
             onDelete();
           }}
         >
-          Delete CV
+          {t('delete')} {t('cv.cv')}
         </MenuItem>
       </Menu>
     </>

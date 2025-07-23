@@ -1,8 +1,22 @@
 {
+  "cancel": "Cancel",
+  "search": "Search",
+  "create": "Create",
+  "confirm": "Confirm",
+  "cv": {
+    "cv": "CV",
+    "cvs": "CVs",
+    "name": "Name",
+    "education": "Education",
+    "employee": "Employee",
+    "details": "Details",
+    "description": "Description",
+    "sure": "Are you sure you want to delete CV"
+  },
+  "delete": "Delete",
   "auth": {
     "email": "Email",
     "password": "Password",
-    "cancel": "Cancel",
     "logout": "Logout",
     "haveAccount": "I have an account",
     "login": {
@@ -24,23 +38,23 @@
     }
   },
   "sidebar": {
-    "employees": "Сотрудники",
-    "skills": "Навыки",
-    "settings": "Настройки",
-    "languages": "Языки",
-    "cvs": "Резюме",
-    "profile": "Профиль",
-    "logout": "Выйти"
+    "employees": "Employees",
+    "skills": "Skills",
+    "settings": "Settings",
+    "languages": "Languages",
+    "cvs": "CVs",
+    "profile": "Profile",
+    "logout": "Logout"
   },
   "settings": {
-    "appearance": "Внешний вид",
-    "language": "Язык",
-    "dark": "Темный",
-    "light": "Светлый"
+    "appearance": "Appearance",
+    "language": "Language",
+    "dark": "Dark",
+    "light": "Light"
   },
   "menu": {
-    "profile": "Профиль",
-    "settings": "Настройки",
-    "logout": "Выйти"
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
   }
 }

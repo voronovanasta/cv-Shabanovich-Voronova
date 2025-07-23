@@ -22,6 +22,7 @@ import DeleteCvDialog from '../../shared/ui/modal/DeleteCVModal';
 import useDeleteCV from '../../features/cvs/model/useDeleteCV';
 import { useAuthStore } from '../../features/auth/model/store/useAuthStore';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const CVsPage = () => {
   const { data } = useGetCVsList();
@@ -33,6 +34,7 @@ const CVsPage = () => {
   const deleteCVMutation = useDeleteCV();
   const userId = useAuthStore((state) => state.userId);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const handleCreateCv = (data: ICreateCVFormData) => {
     console.log('CV submitted:', data);
     createCVMutation.mutate({
@@ -59,7 +61,7 @@ const CVsPage = () => {
   return (
     <Box color='white'>
       <Typography variant='h6' mb={2}>
-        CVs
+        {t('cv.cvs')}
       </Typography>
       <Box display='flex' justifyContent='space-between' alignItems='center' mb={2}>
         <SearchBar />
@@ -95,7 +97,7 @@ const CVsPage = () => {
               color: '#f44336',
             }}
           >
-            CREATE CV
+            {t('create')} {t('cv.cv')}
           </Typography>
         </Button>
       </Box>
@@ -103,9 +105,9 @@ const CVsPage = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Education</TableCell>
-              <TableCell>Employee</TableCell>
+              <TableCell>{t('cv.name')}</TableCell>
+              <TableCell>{t('cv.education')}</TableCell>
+              <TableCell>{t('cv.employee')}</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
