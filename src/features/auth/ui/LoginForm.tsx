@@ -35,7 +35,7 @@ export default function LoginForm() {
 
   const onSubmit = (data: LoginFormInputs) => {
     loginMutation.mutate({
-      input: {
+      auth: {
         email: data.email,
         password: data.password,
       },
