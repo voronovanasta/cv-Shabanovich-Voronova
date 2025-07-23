@@ -1,8 +1,37 @@
-import useUsers from '../../features/users/model/getUsers';
+import useUpdateUser from '../../features/users/model/api/updateUser';
+import useGetUsers from '../../features/users/model/api/getUsers';
 
 export default function UsersPage() {
-  const { data } = useUsers();
-  console.log(data);
+  const { data: users } = useGetUsers();
+  console.log(users);
 
-  return <h1>Users Page</h1>;
+  const variables = {
+    id: 'user1',
+    input: {
+      username: 'adminUser',
+      email: 'admin@example.com',
+      password: 'SecurePass123!',
+      firstName: 'Admin',
+      lastName: 'User',
+      departmentId: 'dep-001',
+      positionId: 'pos-002',
+      skills: ['React', 'GraphQL'],
+      languages: ['English', 'German'],
+    },
+  };
+
+  const updateUserMutation = useUpdateUser();
+  const clickHandler = () => {
+    console.log('Update user clicked');
+    updateUserMutation.mutate(variables, {
+      onSuccess: (data) => {
+        console.log('User updated successfully:', data.updateUser);
+      },
+      onError: (error) => {
+        console.error('Error updating user:', error.message);
+      },
+    });
+  };
+
+  return <button onClick={clickHandler}>Users Page</button>;
 }

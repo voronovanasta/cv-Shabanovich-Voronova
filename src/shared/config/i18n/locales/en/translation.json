@@ -22,5 +22,25 @@
       "subtitle": "We will send you an email with further instructions",
       "button": "Reset Password"
     }
+  },
+  "sidebar": {
+    "employees": "Сотрудники",
+    "skills": "Навыки",
+    "settings": "Настройки",
+    "languages": "Языки",
+    "cvs": "Резюме",
+    "profile": "Профиль",
+    "logout": "Выйти"
+  },
+  "settings": {
+    "appearance": "Внешний вид",
+    "language": "Язык",
+    "dark": "Темный",
+    "light": "Светлый"
+  },
+  "menu": {
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logout": "Выйти"
   }
 }

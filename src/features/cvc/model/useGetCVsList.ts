@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { GetCVsDocument } from '../../../graphql/graphql';
-import { execute } from '../../../graphql/execute';
+import { execute } from '../../../shared/api/execute';
 
 export default function useGetCVsList() {
   return useQuery({

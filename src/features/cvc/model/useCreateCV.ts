@@ -4,8 +4,9 @@ import {
   type CreateCvMutation,
   type CreateCvMutationVariables,
 } from '../../../graphql/graphql';
-import { execute } from '../../../graphql/execute';
+
 import { useNavigate } from 'react-router-dom';
+import { execute } from '../../../shared/api/execute';
 
 export default function useCreateCV() {
   const navigate = useNavigate();
