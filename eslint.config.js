@@ -8,7 +8,7 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 
 export default tseslint.config([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'graphql', 'node_modules']),
   {
     plugins: {
       prettier: prettierPlugin,

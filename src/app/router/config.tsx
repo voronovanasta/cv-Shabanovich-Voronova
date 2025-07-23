@@ -6,11 +6,8 @@ import RegisterPage from '../../pages/auth/register';
 import ForgotPasswordPage from '../../pages/auth/forgot-password';
 import MainLayout from '../../widgets/main-layout/ui/MainLayout';
 import UsersPage from '../../pages/users';
-<<<<<<< HEAD
 import SettingsPage from '../../pages/settings/SettingsPage';
-=======
 import CVsPage from '../../pages/cvs/CVsPage';
->>>>>>> development
 
 //TODO
 // Lazy загрузка страниц
