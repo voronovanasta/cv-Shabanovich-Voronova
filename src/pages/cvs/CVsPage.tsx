@@ -9,10 +9,8 @@ import {
   TableRow,
   Paper,
   Button,
-  IconButton,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchBar from '../../shared/ui/searchbar/SearchBar';
 import useGetCVsList from '../../features/cvs/model/useGetCVsList';
 import { useState } from 'react';
@@ -42,13 +40,13 @@ const CVsPage = () => {
   return (
     <Box color='white'>
       <Typography variant='h6' mb={2}>
-        CVs
+        {t('cv.cvs')}
       </Typography>
       <Box display='flex' justifyContent='space-between' alignItems='center' mb={2}>
         <SearchBar />
         <CreateCvModal open={open} onClose={() => setOpen(false)} onSubmitCv={handleCreateCv} />
         <Button
-          onClick={() => setOpen(true)}
+          onClick={() => setOpenCreateCV(true)}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -64,7 +62,7 @@ const CVsPage = () => {
               color: '#f44336',
             }}
           >
-            CREATE CV
+            {t('create')} {t('cv.cv')}
           </Typography>
         </Button>
       </Box>
@@ -72,9 +70,9 @@ const CVsPage = () => {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Education</TableCell>
-              <TableCell>Employee</TableCell>
+              <TableCell>{t('cv.name')}</TableCell>
+              <TableCell>{t('cv.education')}</TableCell>
+              <TableCell>{t('cv.employee')}</TableCell>
               <TableCell></TableCell>
             </TableRow>
           </TableHead>
@@ -88,9 +86,7 @@ const CVsPage = () => {
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.education}</TableCell>
                   {/* <TableCell sx={{ borderBottom: 'none' }}>{cv.userId}</TableCell> */}
                   <TableCell sx={{ textAlign: 'right', borderBottom: 'none', pt: 3 }}>
-                    <IconButton>
-                      <MoreVertIcon />
-                    </IconButton>
+                    <CvMenu onDetails={onDetails} onDelete={() => onDelete(cv.id, cv.name)} />
                   </TableCell>
                 </TableRow>
                 <TableRow>

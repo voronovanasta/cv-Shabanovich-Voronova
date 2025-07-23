@@ -1,8 +1,22 @@
 {
+  "cancel": "Cancel",
+  "search": "Search",
+  "create": "Create",
+  "confirm": "Confirm",
+  "cv": {
+    "cv": "CV",
+    "cvs": "CVs",
+    "name": "Name",
+    "education": "Education",
+    "employee": "Employee",
+    "details": "Details",
+    "description": "Description",
+    "sure": "Are you sure you want to delete CV"
+  },
+  "delete": "Delete",
   "auth": {
     "email": "Email",
     "password": "Password",
-    "cancel": "Cancel",
     "logout": "Logout",
     "haveAccount": "I have an account",
     "login": {

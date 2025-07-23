@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 mutation CreateCv($cv: CreateCvInput!) {
   createCv(cv: $cv) {
     id
@@ -30,5 +31,17 @@ mutation CreateCv($cv: CreateCvInput!) {
       roles
       responsibilities
     }
+=======
+mutation CreateCV($input: CVInput!) {
+  createCV(input: $input) {
+    id
+    userId
+    name
+    summary
+    education
+    experience
+    skills
+    languages
+>>>>>>> 928c4a45b28a94b12cccacc2d99501d16dce6d16
   }
 }
