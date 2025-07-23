@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 mutation DeleteCv($cv: DeleteCvInput!) {
   deleteCv(cv: $cv) {
     affected
   }
-=======
-mutation DeleteCV($id: ID!) {
-  deleteCV(id: $id)
->>>>>>> 928c4a45b28a94b12cccacc2d99501d16dce6d16
 }

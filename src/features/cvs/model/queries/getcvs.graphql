@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 query GetCvs {
   cvs {
     id
@@ -6,17 +5,5 @@ query GetCvs {
     name
     education
     description
-=======
-query GetCVs {
-  cvs {
-    id
-    userId
-    name
-    summary
-    experience
-    education
-    skills
-    languages
->>>>>>> 928c4a45b28a94b12cccacc2d99501d16dce6d16
   }
 }
