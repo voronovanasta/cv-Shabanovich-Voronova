@@ -358,6 +358,13 @@ export type CreateCvMutationVariables = Exact<{
 
 export type CreateCvMutation = { __typename?: 'Mutation', createCV: { __typename?: 'CVType', id: string, userId?: string | null, name: string, summary: string, education: Array<string>, experience?: Array<string | null> | null, skills?: Array<string | null> | null, languages?: Array<string | null> | null } };
 
+export type DeleteCvMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteCvMutation = { __typename?: 'Mutation', deleteCV: boolean };
+
 export type GetCVsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -401,6 +408,11 @@ export const CreateCvDocument = gql`
   }
 }
     ` as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
+export const DeleteCvDocument = gql`
+    mutation DeleteCV($id: ID!) {
+  deleteCV(id: $id)
+}
+    ` as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
 export const GetCVsDocument = gql`
     query GetCVs {
   cvs {

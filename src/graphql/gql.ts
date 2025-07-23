@@ -17,6 +17,7 @@ type Documents = {
     "mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}": typeof types.LoginDocument,
     "mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}": typeof types.RegisterDocument,
     "mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}": typeof types.CreateCvDocument,
+    "mutation DeleteCV($id: ID!) {\n  deleteCV(id: $id)\n}": typeof types.DeleteCvDocument,
     "query GetCVs {\n  cvs {\n    id\n    userId\n    name\n    summary\n    experience\n    education\n    skills\n    languages\n  }\n}": typeof types.GetCVsDocument,
     "query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}": typeof types.GetUsersDocument,
 };
@@ -24,6 +25,7 @@ const documents: Documents = {
     "mutation Login($input: LoginInput!) {\n  login(input: $input) {\n    accessToken\n    user {\n      username\n    }\n  }\n}": types.LoginDocument,
     "mutation Register($input: UserInput!) {\n  createUser(input: $input) {\n    id\n    email\n  }\n}": types.RegisterDocument,
     "mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}": types.CreateCvDocument,
+    "mutation DeleteCV($id: ID!) {\n  deleteCV(id: $id)\n}": types.DeleteCvDocument,
     "query GetCVs {\n  cvs {\n    id\n    userId\n    name\n    summary\n    experience\n    education\n    skills\n    languages\n  }\n}": types.GetCVsDocument,
     "query getUsers {\n  users {\n    id\n    username\n    email\n    firstName\n    lastName\n    departmentId\n    positionId\n    languages\n    skills\n  }\n}": types.GetUsersDocument,
 };
@@ -54,6 +56,10 @@ export function graphql(source: "mutation Register($input: UserInput!) {\n  crea
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}"): (typeof documents)["mutation CreateCV($input: CVInput!) {\n  createCV(input: $input) {\n    id\n    userId\n    name\n    summary\n    education\n    experience\n    skills\n    languages\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation DeleteCV($id: ID!) {\n  deleteCV(id: $id)\n}"): (typeof documents)["mutation DeleteCV($id: ID!) {\n  deleteCV(id: $id)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

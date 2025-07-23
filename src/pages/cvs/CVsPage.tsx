@@ -9,21 +9,27 @@ import {
   TableRow,
   Paper,
   Button,
-  IconButton,
+  // IconButton,
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+// import MoreVertIcon from '@mui/icons-material/MoreVert';
 import SearchBar from '../../shared/ui/searchbar/SearchBar';
 import useGetCVsList from '../../features/cvc/model/useGetCVsList';
 import { useState } from 'react';
 import CreateCvModal from '../../shared/ui/modal/CreateCVModal';
 import useCreateCV from '../../features/cvc/model/useCreateCV';
 import type ICreateCVFormData from '../../shared/ui/modal/types';
+import CvMenu from '../../shared/ui/cvdropdown/CVDropdown';
+import DeleteCvDialog from '../../shared/ui/modal/DeleteCVModal';
+import useDeleteCV from '../../features/cvc/model/useDeleteCV';
 
 const CVsPage = () => {
   const { data } = useGetCVsList();
-  const [open, setOpen] = useState(false);
+  const [openCreateCV, setOpenCreateCV] = useState(false);
+  const [openDeleteCV, setOpenDeleteCV] = useState(false);
+  const [cvId, setCVId] = useState('');
   const createCVMutation = useCreateCV();
+  const deleteCVMutation = useDeleteCV();
   const handleCreateCv = (data: ICreateCVFormData) => {
     console.log('CV submitted:', data);
     createCVMutation.mutate({
@@ -39,6 +45,13 @@ const CVsPage = () => {
       },
     });
   };
+  const onDelete = (id: string) => {
+    setCVId(id);
+    setOpenDeleteCV(true);
+  };
+  const onDetails = () => {
+    console.log('detailslo');
+  };
   return (
     <Box color='white'>
       <Typography variant='h6' mb={2}>
@@ -46,9 +59,23 @@ const CVsPage = () => {
       </Typography>
       <Box display='flex' justifyContent='space-between' alignItems='center' mb={2}>
         <SearchBar />
-        <CreateCvModal open={open} onClose={() => setOpen(false)} onSubmitCv={handleCreateCv} />
+        <CreateCvModal
+          open={openCreateCV}
+          onClose={() => setOpenCreateCV(false)}
+          onSubmitCv={handleCreateCv}
+        />
+        <DeleteCvDialog
+          open={openDeleteCV}
+          onClose={() => setOpenDeleteCV(false)}
+          onConfirm={() => {
+            deleteCVMutation.mutate({ id: cvId });
+            console.log('CV Deleted');
+            setOpenDeleteCV(false);
+          }}
+          cvTitle='Software Engineer with 5+ years of experience'
+        />
         <Button
-          onClick={() => setOpen(true)}
+          onClick={() => setOpenCreateCV(true)}
           sx={{
             display: 'flex',
             alignItems: 'center',
@@ -88,9 +115,7 @@ const CVsPage = () => {
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.education}</TableCell>
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.userId}</TableCell>
                   <TableCell sx={{ textAlign: 'right', borderBottom: 'none', pt: 3 }}>
-                    <IconButton>
-                      <MoreVertIcon />
-                    </IconButton>
+                    <CvMenu onDetails={onDetails} onDelete={() => onDelete(cv.id)} />
                   </TableCell>
                 </TableRow>
                 <TableRow>
