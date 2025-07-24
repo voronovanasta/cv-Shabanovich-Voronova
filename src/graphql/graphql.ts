@@ -244,13 +244,7 @@ export type MarginInput = {
   top: Scalars['String']['input'];
 };
 
-export enum Mastery {
-  Advanced = 'Advanced',
-  Competent = 'Competent',
-  Expert = 'Expert',
-  Novice = 'Novice',
-  Proficient = 'Proficient',
-}
+export type Mastery = 'Advanced' | 'Competent' | 'Expert' | 'Novice' | 'Proficient';
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -469,15 +463,7 @@ export type Position = {
   name: Scalars['String']['output'];
 };
 
-export enum Proficiency {
-  A1 = 'A1',
-  A2 = 'A2',
-  B1 = 'B1',
-  B2 = 'B2',
-  C1 = 'C1',
-  C2 = 'C2',
-  Native = 'Native',
-}
+export type Proficiency = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2' | 'Native';
 
 export type Profile = {
   __typename?: 'Profile';
@@ -698,10 +684,7 @@ export type User = {
   role: UserRole;
 };
 
-export enum UserRole {
-  Admin = 'Admin',
-  Employee = 'Employee',
-}
+export type UserRole = 'Admin' | 'Employee';
 
 export type VerifyMailInput = {
   otp: Scalars['String']['input'];

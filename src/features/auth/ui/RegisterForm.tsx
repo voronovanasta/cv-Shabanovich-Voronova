@@ -35,7 +35,7 @@ export default function RegisterForm() {
 
   const onSubmit = (data: RegisterFormInputs) => {
     registerMutation.mutate({
-      input: {
+      auth: {
         email: data.email,
         password: data.password,
       },

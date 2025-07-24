@@ -16,7 +16,7 @@ export async function execute<TResult, TVariables = {}>(
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const response = await fetch('http://localhost:3000/api', {
+  const response = await fetch('https://cv-project-js.inno.ws/api/graphql', {
     method: 'POST',
     headers,
     body: JSON.stringify({

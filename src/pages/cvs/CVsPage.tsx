@@ -15,48 +15,44 @@ import SearchBar from '../../shared/ui/searchbar/SearchBar';
 import useGetCVsList from '../../features/cvs/model/useGetCVsByUserList';
 import { useState } from 'react';
 import CreateCvModal from '../../shared/ui/modal/CreateCVModal';
-//import useCreateCV from '../../features/cvs/model/useCreateCV';
+import useCreateCV from '../../features/cvs/model/useCreateCV';
 import type ICreateCVFormData from '../../shared/ui/modal/types';
 import CvMenu from '../../shared/ui/cvdropdown/CVDropdown';
 import DeleteCvDialog from '../../shared/ui/modal/DeleteCVModal';
-//import useDeleteCV from '../../features/cvs/model/useDeleteCV';
-//import { useAuthStore } from '../../features/auth/model/store/useAuthStore';
-//import { useNavigate } from 'react-router-dom';
+import useDeleteCV from '../../features/cvs/model/useDeleteCV';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuthStore } from '../../features/auth/model/store/useAuthStore';
 
 const CVsPage = () => {
   const { data } = useGetCVsList();
   const [openCreateCV, setOpenCreateCV] = useState(false);
   const [openDeleteCV, setOpenDeleteCV] = useState(false);
-  //const [cvId, setCVId] = useState('');
+  const [cvId, setCVId] = useState('');
   const [deleteCVTitle, setDeleteCVTitle] = useState('');
-  // const createCVMutation = useCreateCV();
-  //const deleteCVMutation = useDeleteCV();
-  //const userId = useAuthStore((state) => state.userId);
-  //const navigate = useNavigate();
+  const createCVMutation = useCreateCV();
+  const deleteCVMutation = useDeleteCV();
+  const userId = useAuthStore((state) => state.user);
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const handleCreateCv = (data: ICreateCVFormData) => {
     console.log('CV submitted:', data);
-    // createCVMutation.mutate({
-    //   input: {
-    //     // TODO: email: data.email,
-    //     userId: userId!,
-    //     name: data.name,
-    //     summary: data.summary,
-    //     education: [data.education],
-    //     experience: [],
-    //     skills: [],
-    //     languages: [],
-    //   },
-    // });
+    createCVMutation.mutate({
+      cv: {
+        name: data.name,
+        education: data.education,
+        description: data.summary,
+        userId: userId?.id ?? undefined,
+      },
+    });
   };
   const onDelete = (id: string, title: string) => {
     setDeleteCVTitle(title);
-    // setCVId(id);
+    setCVId(id);
     setOpenDeleteCV(true);
   };
   const onDetails = () => {
-    // navigate(/cvs/${cvId});
+    navigate(`/cvs/${cvId}`);
   };
   return (
     <Box color='white'>
@@ -74,7 +70,11 @@ const CVsPage = () => {
           open={openDeleteCV}
           onClose={() => setOpenDeleteCV(false)}
           onConfirm={() => {
-            // deleteCVMutation.mutate({ id: cvId });
+            deleteCVMutation.mutate({
+              cv: {
+                cvId: cvId,
+              },
+            });
             console.log('CV Deleted');
             setOpenDeleteCV(false);
           }}
@@ -119,16 +119,16 @@ const CVsPage = () => {
                 <TableRow>
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.name}</TableCell>
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.education}</TableCell>
-                  {/* <TableCell sx={{ borderBottom: 'none' }}>{cv.userId}</TableCell> */}
+                  <TableCell sx={{ borderBottom: 'none' }}>{cv.id}</TableCell>
                   <TableCell sx={{ textAlign: 'right', borderBottom: 'none', pt: 3 }}>
                     <CvMenu onDetails={onDetails} onDelete={() => onDelete(cv.id, cv.name)} />
                   </TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell colSpan={4} sx={{ pt: 0 }}>
-                    {/* <Typography variant='body2' sx={{ color: 'gray' }}>
-                      {cv.summary}
-                    </Typography> */}
+                    <Typography variant='body2' sx={{ color: 'gray' }}>
+                      {cv.description}
+                    </Typography>
                   </TableCell>
                 </TableRow>
               </Fragment>
