@@ -6,17 +6,21 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = {
+  [_ in K]?: never;
+};
+export type Incremental<T> =
+  | T
+  | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
+  ID: { input: string; output: string };
+  String: { input: string; output: string };
+  Boolean: { input: boolean; output: boolean };
+  Int: { input: number; output: number };
+  Float: { input: number; output: number };
   /** The `Void` scalar type represents a null variable. */
-  Void: { input: any; output: any; }
+  Void: { input: any; output: any };
 };
 
 export type AddCvProjectInput = {
@@ -240,13 +244,7 @@ export type MarginInput = {
   top: Scalars['String']['input'];
 };
 
-export enum Mastery {
-  Advanced = 'Advanced',
-  Competent = 'Competent',
-  Expert = 'Expert',
-  Novice = 'Novice',
-  Proficient = 'Proficient'
-}
+export type Mastery = 'Advanced' | 'Competent' | 'Expert' | 'Novice' | 'Proficient';
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -294,206 +292,165 @@ export type Mutation = {
   verifyMail?: Maybe<Scalars['Void']['output']>;
 };
 
-
 export type MutationAddCvProjectArgs = {
   project: AddCvProjectInput;
 };
-
 
 export type MutationAddCvSkillArgs = {
   skill: AddCvSkillInput;
 };
 
-
 export type MutationAddProfileLanguageArgs = {
   language: AddProfileLanguageInput;
 };
-
 
 export type MutationAddProfileSkillArgs = {
   skill: AddProfileSkillInput;
 };
 
-
 export type MutationCreateCvArgs = {
   cv: CreateCvInput;
 };
-
 
 export type MutationCreateDepartmentArgs = {
   department: CreateDepartmentInput;
 };
 
-
 export type MutationCreateLanguageArgs = {
   language: CreateLanguageInput;
 };
-
 
 export type MutationCreatePositionArgs = {
   position: CreatePositionInput;
 };
 
-
 export type MutationCreateProjectArgs = {
   project: CreateProjectInput;
 };
-
 
 export type MutationCreateSkillArgs = {
   skill: CreateSkillInput;
 };
 
-
 export type MutationCreateUserArgs = {
   user: CreateUserInput;
 };
-
 
 export type MutationDeleteAvatarArgs = {
   avatar: DeleteAvatarInput;
 };
 
-
 export type MutationDeleteCvArgs = {
   cv: DeleteCvInput;
 };
-
 
 export type MutationDeleteCvSkillArgs = {
   skill: DeleteCvSkillInput;
 };
 
-
 export type MutationDeleteDepartmentArgs = {
   department: DeleteDepartmentInput;
 };
-
 
 export type MutationDeleteLanguageArgs = {
   language: DeleteLanguageInput;
 };
 
-
 export type MutationDeletePositionArgs = {
   position: DeletePositionInput;
 };
-
 
 export type MutationDeleteProfileLanguageArgs = {
   language: DeleteProfileLanguageInput;
 };
 
-
 export type MutationDeleteProfileSkillArgs = {
   skill: DeleteProfileSkillInput;
 };
-
 
 export type MutationDeleteProjectArgs = {
   project: DeleteProjectInput;
 };
 
-
 export type MutationDeleteSkillArgs = {
   skill: DeleteSkillInput;
 };
-
 
 export type MutationDeleteUserArgs = {
   userId: Scalars['ID']['input'];
 };
 
-
 export type MutationExportPdfArgs = {
   pdf: ExportPdfInput;
 };
-
 
 export type MutationForgotPasswordArgs = {
   auth: ForgotPasswordInput;
 };
 
-
 export type MutationRemoveCvProjectArgs = {
   project: RemoveCvProjectInput;
 };
-
 
 export type MutationResetPasswordArgs = {
   auth: ResetPasswordInput;
 };
 
-
 export type MutationSignupArgs = {
   auth: AuthInput;
 };
-
 
 export type MutationUpdateCvArgs = {
   cv: UpdateCvInput;
 };
 
-
 export type MutationUpdateCvProjectArgs = {
   project: UpdateCvProjectInput;
 };
-
 
 export type MutationUpdateCvSkillArgs = {
   skill: UpdateCvSkillInput;
 };
 
-
 export type MutationUpdateDepartmentArgs = {
   department: UpdateDepartmentInput;
 };
-
 
 export type MutationUpdateLanguageArgs = {
   language: UpdateLanguageInput;
 };
 
-
 export type MutationUpdatePositionArgs = {
   position: UpdatePositionInput;
 };
-
 
 export type MutationUpdateProfileArgs = {
   profile: UpdateProfileInput;
 };
 
-
 export type MutationUpdateProfileLanguageArgs = {
   language: UpdateProfileLanguageInput;
 };
-
 
 export type MutationUpdateProfileSkillArgs = {
   skill: UpdateProfileSkillInput;
 };
 
-
 export type MutationUpdateProjectArgs = {
   project: UpdateProjectInput;
 };
-
 
 export type MutationUpdateSkillArgs = {
   skill: UpdateSkillInput;
 };
 
-
 export type MutationUpdateUserArgs = {
   user: UpdateUserInput;
 };
 
-
 export type MutationUploadAvatarArgs = {
   avatar: UploadAvatarInput;
 };
-
 
 export type MutationVerifyMailArgs = {
   mail: VerifyMailInput;
@@ -506,15 +463,7 @@ export type Position = {
   name: Scalars['String']['output'];
 };
 
-export enum Proficiency {
-  A1 = 'A1',
-  A2 = 'A2',
-  B1 = 'B1',
-  B2 = 'B2',
-  C1 = 'C1',
-  C2 = 'C2',
-  Native = 'Native'
-}
+export type Proficiency = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2' | 'Native';
 
 export type Profile = {
   __typename?: 'Profile';
@@ -559,31 +508,25 @@ export type Query = {
   users: Array<User>;
 };
 
-
 export type QueryCvArgs = {
   cvId: Scalars['ID']['input'];
 };
-
 
 export type QueryLoginArgs = {
   auth: AuthInput;
 };
 
-
 export type QueryPositionArgs = {
   id: Scalars['ID']['input'];
 };
-
 
 export type QueryProfileArgs = {
   userId: Scalars['ID']['input'];
 };
 
-
 export type QueryProjectArgs = {
   projectId: Scalars['ID']['input'];
 };
-
 
 export type QueryUserArgs = {
   userId: Scalars['ID']['input'];
@@ -741,10 +684,7 @@ export type User = {
   role: UserRole;
 };
 
-export enum UserRole {
-  Admin = 'Admin',
-  Employee = 'Employee'
-}
+export type UserRole = 'Admin' | 'Employee';
 
 export type VerifyMailInput = {
   otp: Scalars['String']['input'];
@@ -754,219 +694,345 @@ export type SignupMutationVariables = Exact<{
   auth: AuthInput;
 }>;
 
-
-export type SignupMutation = { __typename?: 'Mutation', signup: { __typename?: 'AuthResult', access_token: string, refresh_token: string, user: { __typename?: 'User', id: string, email: string, is_verified: boolean, role: UserRole, profile: { __typename?: 'Profile', first_name?: string | null, last_name?: string | null } } } };
+export type SignupMutation = {
+  __typename?: 'Mutation';
+  signup: {
+    __typename?: 'AuthResult';
+    access_token: string;
+    refresh_token: string;
+    user: {
+      __typename?: 'User';
+      id: string;
+      email: string;
+      is_verified: boolean;
+      role: UserRole;
+      profile: { __typename?: 'Profile'; first_name?: string | null; last_name?: string | null };
+    };
+  };
+};
 
 export type LoginQueryVariables = Exact<{
   auth: AuthInput;
 }>;
 
-
-export type LoginQuery = { __typename?: 'Query', login: { __typename?: 'AuthResult', access_token: string, refresh_token: string, user: { __typename?: 'User', id: string, profile: { __typename?: 'Profile', full_name?: string | null, avatar?: string | null } } } };
+export type LoginQuery = {
+  __typename?: 'Query';
+  login: {
+    __typename?: 'AuthResult';
+    access_token: string;
+    refresh_token: string;
+    user: {
+      __typename?: 'User';
+      id: string;
+      profile: { __typename?: 'Profile'; full_name?: string | null; avatar?: string | null };
+    };
+  };
+};
 
 export type CreateCvMutationVariables = Exact<{
   cv: CreateCvInput;
 }>;
 
-
-export type CreateCvMutation = { __typename?: 'Mutation', createCv: { __typename?: 'Cv', id: string, created_at: string, name: string, education?: string | null, description: string, user?: { __typename?: 'User', id: string, email: string } | null, skills: Array<{ __typename?: 'SkillMastery', name: string, categoryId?: string | null, mastery: Mastery }>, languages: Array<{ __typename?: 'LanguageProficiency', name: string, proficiency: Proficiency }>, projects?: Array<{ __typename?: 'CvProject', id: string, name: string, internal_name: string, description: string, domain: string, start_date: string, end_date?: string | null, environment: Array<string>, roles: Array<string>, responsibilities: Array<string> }> | null } };
+export type CreateCvMutation = {
+  __typename?: 'Mutation';
+  createCv: {
+    __typename?: 'Cv';
+    id: string;
+    created_at: string;
+    name: string;
+    education?: string | null;
+    description: string;
+    user?: { __typename?: 'User'; id: string; email: string } | null;
+    skills: Array<{
+      __typename?: 'SkillMastery';
+      name: string;
+      categoryId?: string | null;
+      mastery: Mastery;
+    }>;
+    languages: Array<{
+      __typename?: 'LanguageProficiency';
+      name: string;
+      proficiency: Proficiency;
+    }>;
+    projects?: Array<{
+      __typename?: 'CvProject';
+      id: string;
+      name: string;
+      internal_name: string;
+      description: string;
+      domain: string;
+      start_date: string;
+      end_date?: string | null;
+      environment: Array<string>;
+      roles: Array<string>;
+      responsibilities: Array<string>;
+    }> | null;
+  };
+};
 
 export type DeleteCvMutationVariables = Exact<{
   cv: DeleteCvInput;
 }>;
 
+export type DeleteCvMutation = {
+  __typename?: 'Mutation';
+  deleteCv: { __typename?: 'DeleteResult'; affected: number };
+};
 
-export type DeleteCvMutation = { __typename?: 'Mutation', deleteCv: { __typename?: 'DeleteResult', affected: number } };
+export type GetCvsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetCvsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetCvsQuery = { __typename?: 'Query', cvs: Array<{ __typename?: 'Cv', id: string, created_at: string, name: string, education?: string | null, description: string }> };
+export type GetCvsQuery = {
+  __typename?: 'Query';
+  cvs: Array<{
+    __typename?: 'Cv';
+    id: string;
+    created_at: string;
+    name: string;
+    education?: string | null;
+    description: string;
+  }>;
+};
 
 export type UpdateUserMutationVariables = Exact<{
   user: UpdateUserInput;
 }>;
 
-
-export type UpdateUserMutation = { __typename?: 'Mutation', updateUser: { __typename?: 'User', id: string, created_at: string, email: string, is_verified: boolean, role: UserRole, department_name?: string | null, position_name?: string | null, department?: { __typename?: 'Department', id: string, name: string } | null, position?: { __typename?: 'Position', id: string, name: string } | null, profile: { __typename?: 'Profile', id: string, first_name?: string | null, last_name?: string | null, avatar?: string | null }, cvs?: Array<{ __typename?: 'Cv', id: string, name: string, created_at: string }> | null } };
+export type UpdateUserMutation = {
+  __typename?: 'Mutation';
+  updateUser: {
+    __typename?: 'User';
+    id: string;
+    created_at: string;
+    email: string;
+    is_verified: boolean;
+    role: UserRole;
+    department_name?: string | null;
+    position_name?: string | null;
+    department?: { __typename?: 'Department'; id: string; name: string } | null;
+    position?: { __typename?: 'Position'; id: string; name: string } | null;
+    profile: {
+      __typename?: 'Profile';
+      id: string;
+      first_name?: string | null;
+      last_name?: string | null;
+      avatar?: string | null;
+    };
+    cvs?: Array<{ __typename?: 'Cv'; id: string; name: string; created_at: string }> | null;
+  };
+};
 
 export type GetUserQueryVariables = Exact<{
   userId: Scalars['ID']['input'];
 }>;
 
+export type GetUserQuery = {
+  __typename?: 'Query';
+  user: {
+    __typename?: 'User';
+    id: string;
+    created_at: string;
+    email: string;
+    is_verified: boolean;
+    role: UserRole;
+    department_name?: string | null;
+    position_name?: string | null;
+    department?: { __typename?: 'Department'; id: string; name: string } | null;
+    position?: { __typename?: 'Position'; id: string; name: string } | null;
+    profile: {
+      __typename?: 'Profile';
+      id: string;
+      first_name?: string | null;
+      last_name?: string | null;
+      avatar?: string | null;
+    };
+    cvs?: Array<{ __typename?: 'Cv'; id: string; name: string; created_at: string }> | null;
+  };
+};
 
-export type GetUserQuery = { __typename?: 'Query', user: { __typename?: 'User', id: string, created_at: string, email: string, is_verified: boolean, role: UserRole, department_name?: string | null, position_name?: string | null, department?: { __typename?: 'Department', id: string, name: string } | null, position?: { __typename?: 'Position', id: string, name: string } | null, profile: { __typename?: 'Profile', id: string, first_name?: string | null, last_name?: string | null, avatar?: string | null }, cvs?: Array<{ __typename?: 'Cv', id: string, name: string, created_at: string }> | null } };
+export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', id: string, email: string, role: UserRole, profile: { __typename?: 'Profile', id: string, first_name?: string | null, last_name?: string | null, full_name?: string | null, avatar?: string | null } }> };
-
+export type GetUsersQuery = {
+  __typename?: 'Query';
+  users: Array<{
+    __typename?: 'User';
+    id: string;
+    email: string;
+    role: UserRole;
+    profile: {
+      __typename?: 'Profile';
+      id: string;
+      first_name?: string | null;
+      last_name?: string | null;
+      full_name?: string | null;
+      avatar?: string | null;
+    };
+  }>;
+};
 
 export const SignupDocument = gql`
-    mutation Signup($auth: AuthInput!) {
-  signup(auth: $auth) {
-    access_token
-    refresh_token
-    user {
-      id
-      email
-      is_verified
-      profile {
-        first_name
-        last_name
+  mutation Signup($auth: AuthInput!) {
+    signup(auth: $auth) {
+      access_token
+      refresh_token
+      user {
+        id
+        email
+        is_verified
+        profile {
+          first_name
+          last_name
+        }
+        role
       }
-      role
     }
   }
-}
-    ` as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
+` as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
 export const LoginDocument = gql`
-    query Login($auth: AuthInput!) {
-  login(auth: $auth) {
-    access_token
-    refresh_token
-    user {
+  query Login($auth: AuthInput!) {
+    login(auth: $auth) {
+      access_token
+      refresh_token
+      user {
+        id
+        profile {
+          full_name
+          avatar
+        }
+      }
+    }
+  }
+` as unknown as DocumentNode<LoginQuery, LoginQueryVariables>;
+export const CreateCvDocument = gql`
+  mutation CreateCv($cv: CreateCvInput!) {
+    createCv(cv: $cv) {
       id
+      created_at
+      name
+      education
+      description
+      user {
+        id
+        email
+      }
+      skills {
+        name
+        categoryId
+        mastery
+      }
+      languages {
+        name
+        proficiency
+      }
+      projects {
+        id
+        name
+        internal_name
+        description
+        domain
+        start_date
+        end_date
+        environment
+        roles
+        responsibilities
+      }
+    }
+  }
+` as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
+export const DeleteCvDocument = gql`
+  mutation DeleteCv($cv: DeleteCvInput!) {
+    deleteCv(cv: $cv) {
+      affected
+    }
+  }
+` as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
+export const GetCvsDocument = gql`
+  query GetCvs {
+    cvs {
+      id
+      created_at
+      name
+      education
+      description
+    }
+  }
+` as unknown as DocumentNode<GetCvsQuery, GetCvsQueryVariables>;
+export const UpdateUserDocument = gql`
+  mutation UpdateUser($user: UpdateUserInput!) {
+    updateUser(user: $user) {
+      id
+      created_at
+      email
+      is_verified
+      role
+      department_name
+      position_name
+      department {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
       profile {
+        id
+        first_name
+        last_name
+        avatar
+      }
+      cvs {
+        id
+        name
+        created_at
+      }
+    }
+  }
+` as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
+export const GetUserDocument = gql`
+  query GetUser($userId: ID!) {
+    user(userId: $userId) {
+      id
+      created_at
+      email
+      is_verified
+      role
+      department_name
+      position_name
+      department {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      profile {
+        id
+        first_name
+        last_name
+        avatar
+      }
+      cvs {
+        id
+        name
+        created_at
+      }
+    }
+  }
+` as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
+export const GetUsersDocument = gql`
+  query GetUsers {
+    users {
+      id
+      email
+      role
+      profile {
+        id
+        first_name
+        last_name
         full_name
         avatar
       }
     }
   }
-}
-    ` as unknown as DocumentNode<LoginQuery, LoginQueryVariables>;
-export const CreateCvDocument = gql`
-    mutation CreateCv($cv: CreateCvInput!) {
-  createCv(cv: $cv) {
-    id
-    created_at
-    name
-    education
-    description
-    user {
-      id
-      email
-    }
-    skills {
-      name
-      categoryId
-      mastery
-    }
-    languages {
-      name
-      proficiency
-    }
-    projects {
-      id
-      name
-      internal_name
-      description
-      domain
-      start_date
-      end_date
-      environment
-      roles
-      responsibilities
-    }
-  }
-}
-    ` as unknown as DocumentNode<CreateCvMutation, CreateCvMutationVariables>;
-export const DeleteCvDocument = gql`
-    mutation DeleteCv($cv: DeleteCvInput!) {
-  deleteCv(cv: $cv) {
-    affected
-  }
-}
-    ` as unknown as DocumentNode<DeleteCvMutation, DeleteCvMutationVariables>;
-export const GetCvsDocument = gql`
-    query GetCvs {
-  cvs {
-    id
-    created_at
-    name
-    education
-    description
-  }
-}
-    ` as unknown as DocumentNode<GetCvsQuery, GetCvsQueryVariables>;
-export const UpdateUserDocument = gql`
-    mutation UpdateUser($user: UpdateUserInput!) {
-  updateUser(user: $user) {
-    id
-    created_at
-    email
-    is_verified
-    role
-    department_name
-    position_name
-    department {
-      id
-      name
-    }
-    position {
-      id
-      name
-    }
-    profile {
-      id
-      first_name
-      last_name
-      avatar
-    }
-    cvs {
-      id
-      name
-      created_at
-    }
-  }
-}
-    ` as unknown as DocumentNode<UpdateUserMutation, UpdateUserMutationVariables>;
-export const GetUserDocument = gql`
-    query GetUser($userId: ID!) {
-  user(userId: $userId) {
-    id
-    created_at
-    email
-    is_verified
-    role
-    department_name
-    position_name
-    department {
-      id
-      name
-    }
-    position {
-      id
-      name
-    }
-    profile {
-      id
-      first_name
-      last_name
-      avatar
-    }
-    cvs {
-      id
-      name
-      created_at
-    }
-  }
-}
-    ` as unknown as DocumentNode<GetUserQuery, GetUserQueryVariables>;
-export const GetUsersDocument = gql`
-    query GetUsers {
-  users {
-    id
-    email
-    role
-    profile {
-      id
-      first_name
-      last_name
-      full_name
-      avatar
-    }
-  }
-}
-    ` as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
+` as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;

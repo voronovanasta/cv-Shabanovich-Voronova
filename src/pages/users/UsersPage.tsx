@@ -7,8 +7,9 @@ export default function UsersPage() {
 
   const variables = {
     id: 'user1',
-    input: {
+    user: {
       username: 'adminUser',
+      userId: 'user999',
       email: 'admin@example.com',
       password: 'SecurePass123!',
       firstName: 'Admin',
