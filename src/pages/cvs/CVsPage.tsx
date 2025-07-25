@@ -51,8 +51,8 @@ const CVsPage = () => {
     setCVId(id);
     setOpenDeleteCV(true);
   };
-  const onDetails = () => {
-    navigate(`/cvs/${cvId}`);
+  const onDetails = (id: string) => {
+    navigate(`/cvs/${id}`);
   };
   return (
     <Box color='white'>
@@ -121,7 +121,10 @@ const CVsPage = () => {
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.education}</TableCell>
                   <TableCell sx={{ borderBottom: 'none' }}>{cv.id}</TableCell>
                   <TableCell sx={{ textAlign: 'right', borderBottom: 'none', pt: 3 }}>
-                    <CvMenu onDetails={onDetails} onDelete={() => onDelete(cv.id, cv.name)} />
+                    <CvMenu
+                      onDetails={() => onDetails(cv.id)}
+                      onDelete={() => onDelete(cv.id, cv.name)}
+                    />
                   </TableCell>
                 </TableRow>
                 <TableRow>
