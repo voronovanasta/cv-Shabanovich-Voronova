@@ -8,6 +8,7 @@ import MainLayout from '../../widgets/main-layout/ui/MainLayout';
 import UsersPage from '../../pages/users/UsersPage';
 import SettingsPage from '../../pages/settings/SettingsPage';
 import CVsPage from '../../pages/cvs/CVsPage';
+import CVDetailsPage from '../../pages/cvs/CVDetailsPage';
 
 //TODO
 // Lazy загрузка страниц
@@ -58,7 +59,7 @@ export const router = createBrowserRouter([
         element: <MainLayout />,
         children: [
           { index: true, element: <CVsPage /> },
-          { path: ':cvId/details', element: /* CVDetailsPage */ null },
+          { path: ':cvId', element: <CVDetailsPage /> },
           { path: ':cvId/skills', element: /* CVSkillsPage */ null },
           { path: ':id/projects', element: /* CVProjectPage */ null },
           { path: ':cvId/preview', element: /* CVPreviewPage */ null },

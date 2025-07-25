@@ -10,8 +10,12 @@
     "education": "Education",
     "employee": "Employee",
     "details": "Details",
+    "skills": "Skills",
+    "projects": "Projects",
+    "preview": "Preview",
     "description": "Description",
-    "sure": "Are you sure you want to delete CV"
+    "sure": "Are you sure you want to delete CV",
+    "update": "Update"
   },
   "delete": "Delete",
   "auth": {
